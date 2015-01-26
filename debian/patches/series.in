@@ -1,4 +1,6 @@
+#if 0
 hg-updates.diff
+#endif
 issue9189.diff
 build-libpython.diff
 deb-setup.diff
@@ -14,7 +16,9 @@ link-opt.diff
 debug-build.diff
 hotshot-import.diff
 linecache.diff
+#if 0
 doc-nodownload.diff
+#endif
 profiled-build.diff
 no-zip-on-sys.path.diff
 platform-lsbrelease.diff
@@ -58,11 +62,15 @@ do-not-italicize-punctuation.patch
 multiarch.diff
 lib2to3-no-pickled-grammar.diff
 add-python-config-sh.diff
+#if 0
 ssl.match_hostname.diff
+#endif
 ext-no-libpython-link.diff
 build-hash.diff
 libffi-shared.diff
 atomic-pyc-rename.diff
 revert-unittest-loader-symlinks19352.diff
+#if 0
 sphinx-no-refcounting.diff
+#endif
 enable-sqlite-loadext.diff
