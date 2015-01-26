@@ -50,6 +50,7 @@ are:
   codecs		module
   collections		module
   compileall		module
+  contextlib		module
   copy			module
   copy_reg		module
   dis			module

@@ -123,6 +123,7 @@ excluded_imports = {
     'tempfile': set(('dummy_thread',)),
     'subprocess': set(('threading',)),
     'shutil': set(('distutils', 'tarfile', 'zipfile')),
+    'ssl': set(('calendar',)),
     'sysconfig': set(('pprint', '_osx_support')),
     }
 
