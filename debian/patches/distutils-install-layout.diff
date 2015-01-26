@@ -4,7 +4,7 @@
 
 --- a/Doc/install/index.rst
 +++ b/Doc/install/index.rst
-@@ -240,6 +240,8 @@
+@@ -250,6 +250,8 @@
  +-----------------+-----------------------------------------------------+--------------------------------------------------+-------+
  | Platform        | Standard installation location                      | Default value                                    | Notes |
  +=================+=====================================================+==================================================+=======+
@@ -13,7 +13,7 @@
  | Unix (pure)     | :file:`{prefix}/lib/python{X.Y}/site-packages`      | :file:`/usr/local/lib/python{X.Y}/site-packages` | \(1)  |
  +-----------------+-----------------------------------------------------+--------------------------------------------------+-------+
  | Unix (non-pure) | :file:`{exec-prefix}/lib/python{X.Y}/site-packages` | :file:`/usr/local/lib/python{X.Y}/site-packages` | \(1)  |
-@@ -249,6 +251,14 @@
+@@ -259,6 +261,14 @@
  
  Notes:
  
@@ -28,7 +28,7 @@
  (1)
     Most Linux distributions include Python as a standard part of the system, so
     :file:`{prefix}` and :file:`{exec-prefix}` are usually both :file:`/usr` on
-@@ -433,6 +443,15 @@
+@@ -443,6 +453,15 @@
  
     /usr/bin/python setup.py install --prefix=/usr/local
  
@@ -44,7 +44,7 @@
  Another possibility is a network filesystem where the name used to write to a
  remote directory is different from the name used to read it: for example, the
  Python interpreter accessed as :file:`/usr/local/bin/python` might search for
-@@ -684,6 +703,17 @@
+@@ -694,6 +713,17 @@
  import them, this directory must be added to ``sys.path``.  There are several
  different ways to add the directory.
  
@@ -278,16 +278,16 @@
      return os.name
  
  def _getuserbase():
-@@ -309,7 +332,7 @@
- def _get_makefile_filename():
+@@ -310,7 +333,7 @@
+     """Return the path of the Makefile."""
      if _PYTHON_BUILD:
          return os.path.join(_PROJECT_BASE, "Makefile")
 -    return os.path.join(get_path('platstdlib'), "config", "Makefile")
 +    return os.path.join(get_path('platstdlib').replace("/usr/local","/usr",1), "config", "Makefile")
  
- def _generate_posix_vars():
-     """Generate the Python module containing build-time variables."""
-@@ -438,7 +461,7 @@
+ # Issue #22199: retain undocumented private name for compatibility
+ _get_makefile_filename = get_makefile_filename
+@@ -442,7 +465,7 @@
          else:
              inc_dir = _PROJECT_BASE
      else:
@@ -338,10 +338,10 @@
 +                  'posix_home', 'posix_local', 'posix_prefix', 'posix_user')
          self.assertEqual(get_scheme_names(), wanted)
  
-     def test_symlink(self):
+     @unittest.skipIf(sys.platform.startswith('win'),
 --- a/Lib/distutils/tests/test_install.py
 +++ b/Lib/distutils/tests/test_install.py
-@@ -195,7 +195,7 @@
+@@ -193,7 +193,7 @@
  
          found = [os.path.basename(line) for line in content.splitlines()]
          expected = ['hello.py', 'hello.pyc', 'sayhi',
@@ -350,7 +350,7 @@
          self.assertEqual(found, expected)
  
      def test_record_extensions(self):
-@@ -225,7 +225,7 @@
+@@ -223,7 +223,7 @@
  
          found = [os.path.basename(line) for line in content.splitlines()]
          expected = [_make_ext_name('xx'),
@@ -372,7 +372,7 @@
          self.assertEqual(contents, sorted(wanted))
 --- a/Lib/pydoc.py
 +++ b/Lib/pydoc.py
-@@ -359,6 +359,7 @@
+@@ -390,6 +390,7 @@
                                   'marshal', 'posix', 'signal', 'sys',
                                   'thread', 'zipimport') or
               (file.startswith(basedir) and

@@ -2,7 +2,7 @@
 
 --- a/setup.py
 +++ b/setup.py
-@@ -850,7 +850,7 @@
+@@ -854,7 +854,7 @@
                  print ("warning: openssl 0x%08x is too old for _hashlib" %
                         openssl_ver)
                  missing.append('_hashlib')
@@ -11,7 +11,7 @@
              # The _sha module implements the SHA1 hash algorithm.
              exts.append( Extension('_sha', ['shamodule.c']) )
              # The _md5 module implements the RSA Data Security, Inc. MD5
-@@ -861,7 +861,7 @@
+@@ -865,7 +865,7 @@
                              depends = ['md5.h']) )
  
          min_sha2_openssl_ver = 0x00908000

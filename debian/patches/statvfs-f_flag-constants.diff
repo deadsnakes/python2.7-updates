@@ -11,7 +11,7 @@ you, so add them here.
 
 --- a/Modules/posixmodule.c
 +++ b/Modules/posixmodule.c
-@@ -9326,6 +9326,43 @@
+@@ -9356,6 +9356,43 @@
      if (ins(d, "EX_NOTFOUND", (long)EX_NOTFOUND)) return -1;
  #endif /* EX_NOTFOUND */
  

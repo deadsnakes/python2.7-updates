@@ -1,6 +1,6 @@
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -1065,6 +1065,8 @@
+@@ -1101,6 +1101,8 @@
  	# Substitution happens here, as the completely-expanded BINDIR
  	# is not available in configure
  	sed -e "s,@EXENAME@,$(BINDIR)/python$(VERSION)$(EXE)," < $(srcdir)/Misc/python-config.in >python-config
@@ -9,7 +9,7 @@
  
  # Install the include files
  INCLDIRSTOMAKE=$(INCLUDEDIR) $(CONFINCLUDEDIR) $(INCLUDEPY) $(CONFINCLUDEPY)
-@@ -1124,6 +1126,7 @@
+@@ -1160,6 +1162,7 @@
  	$(INSTALL_SCRIPT) $(srcdir)/install-sh $(DESTDIR)$(LIBPL)/install-sh
  	$(INSTALL_SCRIPT) python-config $(DESTDIR)$(BINDIR)/python$(VERSION)-config
  	rm python-config
@@ -19,7 +19,7 @@
  		echo; echo "Installing support files for building shared extension modules on AIX:"; \
 --- a/Misc/python-config.in
 +++ b/Misc/python-config.in
-@@ -55,3 +55,11 @@
+@@ -56,3 +56,11 @@
                  libs.extend(getvar('LINKFORSHARED').split())
          print ' '.join(libs)
  
@@ -139,7 +139,7 @@
 +done
 --- a/configure.ac
 +++ b/configure.ac
-@@ -870,6 +870,7 @@
+@@ -873,6 +873,7 @@
  
  # Other platforms follow
  if test $enable_shared = "yes"; then
@@ -147,7 +147,7 @@
    AC_DEFINE(Py_ENABLE_SHARED, 1, [Defined if Python is built as a shared library.])
    case $ac_sys_system in
      BeOS*)
-@@ -930,6 +931,7 @@
+@@ -933,6 +934,7 @@
  
    esac
  else # shared is disabled
@@ -155,7 +155,7 @@
    case $ac_sys_system in
      CYGWIN*)
            BLDLIBRARY='$(LIBRARY)'
-@@ -937,6 +939,7 @@
+@@ -940,6 +942,7 @@
            ;;
    esac
  fi
@@ -163,8 +163,8 @@
  
  if test "$cross_compiling" = yes; then
  	RUNSHARED=
-@@ -4553,7 +4556,7 @@
- AC_MSG_RESULT(done)
+@@ -4592,7 +4595,7 @@
+ AC_SUBST(ENSUREPIP)
  
  # generate output files
 -AC_CONFIG_FILES(Makefile.pre Modules/Setup.config Misc/python.pc)

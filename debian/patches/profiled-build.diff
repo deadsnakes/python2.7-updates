@@ -2,7 +2,7 @@
 
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -428,19 +428,19 @@
+@@ -431,19 +431,19 @@
  	$(MAKE) build_all_use_profile
  
  build_all_generate_profile:

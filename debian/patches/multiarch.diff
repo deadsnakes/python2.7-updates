@@ -1,15 +1,15 @@
 --- a/Lib/sysconfig.py
 +++ b/Lib/sysconfig.py
-@@ -332,7 +332,7 @@
- def _get_makefile_filename():
+@@ -333,7 +333,7 @@
+     """Return the path of the Makefile."""
      if _PYTHON_BUILD:
          return os.path.join(_PROJECT_BASE, "Makefile")
 -    return os.path.join(get_path('platstdlib').replace("/usr/local","/usr",1), "config" + (sys.pydebug and "_d" or ""), "Makefile")
 +    return os.path.join(get_config_var('LIBPL'), "Makefile")
  
- def _generate_posix_vars():
-     """Generate the Python module containing build-time variables."""
-@@ -528,6 +528,12 @@
+ # Issue #22199: retain undocumented private name for compatibility
+ _get_makefile_filename = get_makefile_filename
+@@ -532,6 +532,12 @@
          # the init-function.
          _CONFIG_VARS['userbase'] = _getuserbase()
  
@@ -34,7 +34,7 @@
  # Install prefix for architecture-independent files
  prefix=		@prefix@
  
-@@ -558,6 +561,10 @@
+@@ -571,6 +574,10 @@
  	@mv config.c Modules
  	@echo "The Makefile was updated, you may need to re-run make."
  
@@ -45,7 +45,7 @@
  
  Modules/Setup: $(srcdir)/Modules/Setup.dist
  	@if test -f Modules/Setup; then \
-@@ -921,7 +928,7 @@
+@@ -954,7 +961,7 @@
  	(cd $(DESTDIR)$(MANDIR)/man1; $(LN) -s python2.1 python.1)
  
  # Install the library
@@ -54,7 +54,7 @@
  EXTRAPLATDIR= @EXTRAPLATDIR@
  EXTRAMACHDEPPATH=@EXTRAMACHDEPPATH@
  MACHDEPS=	$(PLATDIR) $(EXTRAPLATDIR)
-@@ -1079,10 +1086,10 @@
+@@ -1115,10 +1122,10 @@
  
  # Install the library and miscellaneous stuff needed for extending/embedding
  # This goes into $(exec_prefix)$(DEBUG_EXT)
@@ -67,7 +67,7 @@
  
  libainstall:	all python-config
  	@for i in $(LIBDIR) $(LIBP) $(LIBPL) $(LIBPC); \
-@@ -1357,6 +1364,11 @@
+@@ -1394,6 +1401,11 @@
  
  Python/thread.o: @THREADHEADERS@
  
@@ -107,7 +107,7 @@
      {"module.so", "rb", C_EXTENSION},
 --- a/configure.ac
 +++ b/configure.ac
-@@ -672,6 +672,9 @@
+@@ -675,6 +675,9 @@
  MULTIARCH=$($CC --print-multiarch 2>/dev/null)
  AC_SUBST(MULTIARCH)
  
@@ -132,7 +132,7 @@
      elif os.name == "nt":
          return os.path.join(prefix, "include")
      elif os.name == "os2":
-@@ -251,7 +255,7 @@
+@@ -252,7 +256,7 @@
      if python_build:
          return os.path.join(project_base, "Makefile")
      lib_dir = get_python_lib(plat_specific=1, standard_lib=1)
@@ -143,7 +143,7 @@
  def parse_config_h(fp, g=None):
 --- a/Python/sysmodule.c
 +++ b/Python/sysmodule.c
-@@ -1435,6 +1435,8 @@
+@@ -1453,6 +1453,8 @@
                          PyFloat_GetInfo());
      SET_SYS_FROM_STRING("long_info",
                          PyLong_GetInfo());

@@ -3,7 +3,7 @@
 
 --- a/Modules/posixmodule.c
 +++ b/Modules/posixmodule.c
-@@ -9218,12 +9218,14 @@
+@@ -9248,12 +9248,14 @@
  #ifdef O_LARGEFILE
      if (ins(d, "O_LARGEFILE", (long)O_LARGEFILE)) return -1;
  #endif
@@ -20,7 +20,7 @@
  #ifdef O_NOINHERIT
 --- a/Modules/socketmodule.c
 +++ b/Modules/socketmodule.c
-@@ -4902,9 +4902,11 @@
+@@ -4906,9 +4906,11 @@
  #ifdef  SO_OOBINLINE
      PyModule_AddIntConstant(m, "SO_OOBINLINE", SO_OOBINLINE);
  #endif

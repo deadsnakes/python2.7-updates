@@ -14,9 +14,9 @@ Bug-Ubuntu: https://launchpad.net/bugs/1255505
                      if realpath.lower() != fullpath_noext.lower():
                          module_dir = os.path.dirname(realpath)
                          mod_name = os.path.splitext(os.path.basename(full_path))[0]
---- a/Lib/unittest/test/test_discovery.py	2013-11-28 17:29:32.092312004 +0100
-+++ b/Lib/unittest/test/test_discovery.py	2013-11-28 17:29:49.224311629 +0100
-@@ -314,7 +314,7 @@
+--- a/Lib/unittest/test/test_discovery.py
++++ b/Lib/unittest/test/test_discovery.py
+@@ -315,7 +315,7 @@
          self.assertTrue(program.failfast)
          self.assertTrue(program.catchbreak)
  
@@ -25,7 +25,7 @@ Bug-Ubuntu: https://launchpad.net/bugs/1255505
          class Module(object):
              __file__ = 'bar/foo.py'
          sys.modules['foo'] = Module
-@@ -341,10 +341,7 @@
+@@ -342,10 +342,7 @@
          os.listdir = listdir
          os.path.isfile = isfile
          os.path.isdir = isdir
@@ -36,7 +36,7 @@ Bug-Ubuntu: https://launchpad.net/bugs/1255505
          loader = unittest.TestLoader()
  
          mod_dir = os.path.abspath('bar')
-@@ -357,25 +354,6 @@
+@@ -358,25 +355,6 @@
          )
          self.assertEqual(sys.path[0], full_path)
  
