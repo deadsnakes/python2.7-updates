@@ -979,7 +979,7 @@ endif
 	  Demo/{classes/*.py*,comparisons/patterns} \
 	  Demo/{rpc/test,threads/*.py*,md5test/*} \
 	  Demo/pdist/{client.py,cmdfw.py,cmptree.py,cvslib.py,cvslock.py,FSProxy.py,mac.py,rcsclient.py,rcslib.py,security.py,server.py,sumtree.py} \
-	  Demo/scripts/{morse.py,newslist.doc} \
+	  Demo/scripts/morse.py \
 	  Demo/sockets/{broadcast.py,ftp.py,mcast.py,radio.py} \
 	  Demo/tix/{bitmaps/{tix.gif,*x[pb]m*},samples/*.py} \
 	  Demo/tkinter/guido/{AttrDialog.py,hanoi.py,hello.py,imagedraw.py,imageview.py,listtree.py,ManPage.py,ShellWindow.py,wish.py} \
