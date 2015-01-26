@@ -1,0 +1,22 @@
+# DP: Don't include object files twice in libpython.
+
+--- a/Makefile.pre.in
++++ b/Makefile.pre.in
+@@ -404,7 +404,7 @@
+ 		$(PYTHON_OBJS) \
+ 		$(MODULE_OBJS) \
+ 		$(SIGNAL_OBJS) \
+-		$(MODOBJS)
++		$(sort $(MODOBJS))
+ 
+ #########################################################################
+ # Rules
+@@ -478,7 +478,7 @@
+ 	$(AR) $(ARFLAGS) $@ $(OBJECT_OBJS)
+ 	$(AR) $(ARFLAGS) $@ $(PYTHON_OBJS)
+ 	$(AR) $(ARFLAGS) $@ $(MODULE_OBJS) $(SIGNAL_OBJS)
+-	$(AR) $(ARFLAGS) $@ $(MODOBJS)
++	$(AR) $(ARFLAGS) $@ $(sort $(MODOBJS))
+ 	$(RANLIB) $@
+ 
+ libpython$(VERSION).so: $(LIBRARY_OBJS)

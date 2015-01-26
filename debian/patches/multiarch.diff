@@ -1,0 +1,154 @@
+--- a/Lib/sysconfig.py
++++ b/Lib/sysconfig.py
+@@ -332,7 +332,7 @@
+ def _get_makefile_filename():
+     if _PYTHON_BUILD:
+         return os.path.join(_PROJECT_BASE, "Makefile")
+-    return os.path.join(get_path('platstdlib').replace("/usr/local","/usr",1), "config" + (sys.pydebug and "_d" or ""), "Makefile")
++    return os.path.join(get_config_var('LIBPL'), "Makefile")
+ 
+ def _generate_posix_vars():
+     """Generate the Python module containing build-time variables."""
+@@ -528,6 +528,12 @@
+         # the init-function.
+         _CONFIG_VARS['userbase'] = _getuserbase()
+ 
++        multiarch = get_config_var('MULTIARCH')
++        if multiarch:
++            _CONFIG_VARS['multiarchsubdir'] = '/' + multiarch
++        else:
++            _CONFIG_VARS['multiarchsubdir'] = ''
++
+         if 'srcdir' not in _CONFIG_VARS:
+             _CONFIG_VARS['srcdir'] = _PROJECT_BASE
+ 
+--- a/Makefile.pre.in
++++ b/Makefile.pre.in
+@@ -97,6 +97,9 @@
+ # Multiarch directory (may be empty)
+ MULTIARCH=	@MULTIARCH@
+ 
++# Multiarch directory (may be empty)
++MULTIARCH=	@MULTIARCH@
++
+ # Install prefix for architecture-independent files
+ prefix=		@prefix@
+ 
+@@ -558,6 +561,10 @@
+ 	@mv config.c Modules
+ 	@echo "The Makefile was updated, you may need to re-run make."
+ 
++Python/dynload_shlib.o: $(srcdir)/Python/dynload_shlib.c Makefile
++	$(CC) -c $(PY_CORE_CFLAGS) \
++		$(if $(MULTIARCH),-DMULTIARCH='"$(MULTIARCH)"') \
++		-o $@ $(srcdir)/Python/dynload_shlib.c
+ 
+ Modules/Setup: $(srcdir)/Modules/Setup.dist
+ 	@if test -f Modules/Setup; then \
+@@ -921,7 +928,7 @@
+ 	(cd $(DESTDIR)$(MANDIR)/man1; $(LN) -s python2.1 python.1)
+ 
+ # Install the library
+-PLATDIR=	plat-$(MACHDEP)
++PLATDIR=	plat-$(MULTIARCH)
+ EXTRAPLATDIR= @EXTRAPLATDIR@
+ EXTRAMACHDEPPATH=@EXTRAMACHDEPPATH@
+ MACHDEPS=	$(PLATDIR) $(EXTRAPLATDIR)
+@@ -1079,10 +1086,10 @@
+ 
+ # Install the library and miscellaneous stuff needed for extending/embedding
+ # This goes into $(exec_prefix)$(DEBUG_EXT)
+-LIBPL=		$(LIBP)/config$(DEBUG_EXT)
++LIBPL=		$(LIBP)/config-$(MULTIARCH)$(DEBUG_EXT)
+ 
+ # pkgconfig directory
+-LIBPC=		$(LIBDIR)/pkgconfig
++LIBPC=		$(LIBDIR)/$(MULTIARCH)/pkgconfig
+ 
+ libainstall:	all python-config
+ 	@for i in $(LIBDIR) $(LIBP) $(LIBPL) $(LIBPC); \
+@@ -1357,6 +1364,11 @@
+ 
+ Python/thread.o: @THREADHEADERS@
+ 
++Python/sysmodule.o: $(srcdir)/Python/sysmodule.c Makefile
++	$(CC) -c $(PY_CORE_CFLAGS) \
++		-DMULTIARCH='"$(MULTIARCH)"' \
++		-o $@ $(srcdir)/Python/sysmodule.c
++
+ # Declare targets that aren't real files
+ .PHONY: all build_all sharedmods oldsharedmods test quicktest memtest
+ .PHONY: install altinstall oldsharedinstall bininstall altbininstall
+--- a/Modules/Setup.dist
++++ b/Modules/Setup.dist
+@@ -91,7 +91,7 @@
+ TESTPATH=
+ 
+ # Path components for machine- or system-dependent modules and shared libraries
+-MACHDEPPATH=:plat-$(MACHDEP)
++MACHDEPPATH=:plat-$(MULTIARCH)
+ EXTRAMACHDEPPATH=
+ 
+ # Path component for the Tkinter-related modules
+--- a/Python/dynload_shlib.c
++++ b/Python/dynload_shlib.c
+@@ -49,6 +49,12 @@
+ #ifdef Py_DEBUG
+     {"_d.so", "rb", C_EXTENSION},
+     {"module_d.so", "rb", C_EXTENSION},
++# ifdef MULTIARCH
++    {"." MULTIARCH "_d.so", "rb", C_EXTENSION},
++# endif
++#endif
++#ifdef MULTIARCH
++    {"." MULTIARCH ".so", "rb", C_EXTENSION},
+ #endif
+     {".so", "rb", C_EXTENSION},
+     {"module.so", "rb", C_EXTENSION},
+--- a/configure.ac
++++ b/configure.ac
+@@ -672,6 +672,9 @@
+ MULTIARCH=$($CC --print-multiarch 2>/dev/null)
+ AC_SUBST(MULTIARCH)
+ 
++MULTIARCH=$($CC --print-multiarch 2>/dev/null)
++AC_SUBST(MULTIARCH)
++
+ 
+ # checks for UNIX variants that set C preprocessor variables
+ AC_USE_SYSTEM_EXTENSIONS
+--- a/Lib/distutils/sysconfig.py
++++ b/Lib/distutils/sysconfig.py
+@@ -90,7 +90,11 @@
+                 # Include is located in the srcdir
+                 inc_dir = os.path.join(srcdir, "Include")
+             return inc_dir
+-        return os.path.join(prefix, "include", "python" + get_python_version())+(sys.pydebug and "_d" or "")
++        else:
++            if plat_specific:
++                return get_config_var('CONFINCLUDEPY')
++            else:
++                return get_config_var('INCLUDEPY')
+     elif os.name == "nt":
+         return os.path.join(prefix, "include")
+     elif os.name == "os2":
+@@ -251,7 +255,7 @@
+     if python_build:
+         return os.path.join(project_base, "Makefile")
+     lib_dir = get_python_lib(plat_specific=1, standard_lib=1)
+-    return os.path.join(lib_dir, "config"+(sys.pydebug and "_d" or ""), "Makefile")
++    return os.path.join(get_config_var('LIBPL'), "Makefile")
+ 
+ 
+ def parse_config_h(fp, g=None):
+--- a/Python/sysmodule.c
++++ b/Python/sysmodule.c
+@@ -1435,6 +1435,8 @@
+                         PyFloat_GetInfo());
+     SET_SYS_FROM_STRING("long_info",
+                         PyLong_GetInfo());
++    SET_SYS_FROM_STRING("_multiarch",
++                        PyString_FromString(MULTIARCH));
+ #ifdef Py_USING_UNICODE
+     SET_SYS_FROM_STRING("maxunicode",
+                         PyInt_FromLong(PyUnicode_GetMax()));
