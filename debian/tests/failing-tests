@@ -56,6 +56,9 @@ TESTEXCLUSIONS="$TESTEXCLUSIONS test_gdb"
 # test_zipfile: Issue 17753, requires write access to test and email.test
 TESTEXCLUSIONS="$TESTEXCLUSIONS test_zipfile"
 
+# test_ensurepip: we replaced ensurepip with a deactivated version
+TESTEXCLUSIONS="$TESTEXCLUSIONS test_ensurepip"
+
 if [ "$su_user" = nobody ]; then
   log=/dev/null
 else
