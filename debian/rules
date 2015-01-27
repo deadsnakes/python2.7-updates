@@ -636,6 +636,10 @@ endif
 	rm -f $(d)/usr/bin/python2{,-config}
 	rm -f $(d)/usr/share/man/man1/python2{,-config}.1
 
+	: # include disabled ensurepip replacement
+	rm -rf $(d)/$(scriptdir)/ensurepip
+	cp -p debian/ensurepip.py $(d)/$(scriptdir)
+
 	: # fix some file permissions
 	chmod a-x $(d)/$(scriptdir)/{fractions,lib-tk/Tix}.py
 
