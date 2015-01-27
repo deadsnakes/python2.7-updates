@@ -719,6 +719,10 @@ endif
 		$(d)/$(scriptdir)/plat-$(DEB_HOST_MULTIARCH)/_sysconfigdata_nd.py
 	cp -p debian/_sysconfigdata.py $(d)/$(scriptdir)
 
+	: # include disabled ensurepip replacement
+	rm -rf $(d)/$(scriptdir)/ensurepip
+	cp -p debian/ensurepip.py $(d)/$(scriptdir)
+
 	-find $(d)/usr/lib/python$(VER) -name '*_failed*.so'
 	find $(d)/usr/lib/python$(VER) -name '*_failed*.so' | xargs -r rm -f
 

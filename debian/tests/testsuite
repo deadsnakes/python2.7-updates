@@ -58,6 +58,9 @@ TESTEXCLUSIONS="$TESTEXCLUSIONS test_subprocess"
 # test_uuid: fails, but not on the buildd. need to investigate
 TESTEXCLUSIONS="$TESTEXCLUSIONS test_uuid"
 
+# test_ensurepip: we replaced ensurepip with a deactivated version
+TESTEXCLUSIONS="$TESTEXCLUSIONS test_ensurepip"
+
 if [ "$su_user" = nobody ]; then
   log=/dev/null
   # test_site: Issue 17758, fails to create HOME
