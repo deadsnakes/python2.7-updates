@@ -2,7 +2,7 @@
 
 --- a/Modules/getpath.c
 +++ b/Modules/getpath.c
-@@ -380,7 +380,9 @@
+@@ -395,7 +395,9 @@
      char *path = getenv("PATH");
      char *prog = Py_GetProgramName();
      char argv0_path[MAXPATHLEN+1];
@@ -12,7 +12,7 @@
      int pfound, efound; /* 1 if found; -1 if found build directory */
      char *buf;
      size_t bufsz;
-@@ -520,6 +522,7 @@
+@@ -535,6 +537,7 @@
      else
          reduce(prefix);
  
@@ -20,7 +20,7 @@
      strncpy(zip_path, prefix, MAXPATHLEN);
      zip_path[MAXPATHLEN] = '\0';
      if (pfound > 0) { /* Use the reduced prefix returned by Py_GetPrefix() */
-@@ -532,6 +535,7 @@
+@@ -547,6 +550,7 @@
      bufsz = strlen(zip_path);   /* Replace "00" with version */
      zip_path[bufsz - 6] = VERSION[0];
      zip_path[bufsz - 5] = VERSION[2];
@@ -28,7 +28,7 @@
  
      if (!(efound = search_for_exec_prefix(argv0_path, home))) {
          if (!Py_FrozenFlag)
-@@ -571,7 +575,9 @@
+@@ -586,7 +590,9 @@
          defpath = delim + 1;
      }
  
@@ -38,7 +38,7 @@
      bufsz += strlen(exec_prefix) + 1;
  
      /* This is the only malloc call in this file */
-@@ -592,9 +598,11 @@
+@@ -607,9 +613,11 @@
          else
              buf[0] = '\0';
  

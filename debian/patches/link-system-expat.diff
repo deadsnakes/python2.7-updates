@@ -2,7 +2,7 @@
 
 --- a/Modules/Setup.dist
 +++ b/Modules/Setup.dist
-@@ -180,7 +180,7 @@
+@@ -181,7 +181,7 @@
  #itertools itertoolsmodule.c	# Functions creating iterators for efficient looping 
  #strop stropmodule.c		# String manipulations
  #_functools _functoolsmodule.c	# Tools for working with functions and callable objects
@@ -11,7 +11,7 @@
  #_pickle _pickle.c	# pickle accelerator
  #datetime datetimemodule.c	# date/time type
  #_bisect _bisectmodule.c	# Bisection algorithms
-@@ -471,7 +471,7 @@
+@@ -475,7 +475,7 @@
  #
  # More information on Expat can be found at www.libexpat.org.
  #

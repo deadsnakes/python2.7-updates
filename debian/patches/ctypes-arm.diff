@@ -1,6 +1,6 @@
 --- a/Lib/ctypes/util.py
 +++ b/Lib/ctypes/util.py
-@@ -206,16 +206,27 @@
+@@ -213,16 +213,27 @@
  
          def _findSoname_ldconfig(name):
              import struct

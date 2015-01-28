@@ -15,7 +15,7 @@
  A path configuration file is a file whose name has the form
  <package>.pth; its contents are additional directories (one per line)
  to be added to sys.path.  Non-existing directories (or
-@@ -300,10 +306,12 @@
+@@ -288,10 +294,12 @@
          if sys.platform in ('os2emx', 'riscos'):
              sitepackages.append(os.path.join(prefix, "Lib", "site-packages"))
          elif os.sep == '/':

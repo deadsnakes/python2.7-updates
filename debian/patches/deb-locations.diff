@@ -29,7 +29,7 @@
  for dir in MANNDIRLIST:
 --- a/Misc/python.man
 +++ b/Misc/python.man
-@@ -323,7 +323,7 @@
+@@ -338,7 +338,7 @@
  These are subject to difference depending on local installation
  conventions; ${prefix} and ${exec_prefix} are installation-dependent
  and should be interpreted as for GNU software; they may be the same.

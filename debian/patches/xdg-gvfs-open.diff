@@ -1,8 +1,8 @@
 --- a/Lib/webbrowser.py
 +++ b/Lib/webbrowser.py
-@@ -441,6 +441,14 @@
- 
- def register_X_browsers():
+@@ -461,6 +461,14 @@
+     if "GNOME_DESKTOP_SESSION_ID" in os.environ and _iscommand("gvfs-open"):
+         register("gvfs-open", None, BackgroundBrowser("gvfs-open"))
  
 +    # use xdg-open if around
 +    if _iscommand("xdg-open"):
