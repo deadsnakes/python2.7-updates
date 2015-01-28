@@ -16,7 +16,7 @@
  
  build_all_use_profile:
 -	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-use"
-+	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) -fprofile-use"
++	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) -fprofile-use -fprofile-correction"
  
  coverage:
  	@echo "Building with support for coverage checking:"
