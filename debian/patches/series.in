@@ -68,3 +68,4 @@ xdg-gvfs-open.diff
 // disable_ssl_test_algorithms.diff
 CVE-2014-1912.diff
 // syslog.diff
+build-libpython.diff
