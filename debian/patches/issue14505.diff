@@ -1,0 +1,27 @@
+
+# HG changeset patch
+# User Antoine Pitrou <solipsis@pitrou.net>
+# Date 1333627672 -7200
+# Node ID 8258e5fa4a194f3639f7b6e3ab354f93cd33af9c
+# Parent  4416efeb016375fdb01bc0a485b93b6cde477118
+Issue #14505: Fix file descriptor leak when deallocating file objects created with PyFile_FromString().
+
+- Issue #14505: Fix file descriptor leak when deallocating file objects
+  created with PyFile_FromString().
+
+diff --git a/Objects/fileobject.c b/Objects/fileobject.c
+--- a/Objects/fileobject.c
++++ b/Objects/fileobject.c
+@@ -493,9 +493,10 @@ PyFile_FromFile(FILE *fp, char *name, ch
+ PyObject *
+ PyFile_FromString(char *name, char *mode)
+ {
++    extern int fclose(FILE *);
+     PyFileObject *f;
+ 
+-    f = (PyFileObject *)PyFile_FromFile((FILE *)NULL, name, mode, NULL);
++    f = (PyFileObject *)PyFile_FromFile((FILE *)NULL, name, mode, fclose);
+     if (f != NULL) {
+         if (open_the_file(f, name, mode) == NULL) {
+             Py_DECREF(f);
+

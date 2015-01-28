@@ -1,0 +1,17 @@
+Description: disable a test that requires SNI support.
+Origin: backported from raring's python2.7
+
+Index: python2.7-2.7.3/Lib/test/test_ssl.py
+===================================================================
+--- python2.7-2.7.3.orig/Lib/test/test_ssl.py	2013-09-26 13:23:59.852011440 -0400
++++ python2.7-2.7.3/Lib/test/test_ssl.py	2013-09-26 13:26:20.104010102 -0400
+@@ -376,7 +376,8 @@
+         # SHA256 was added in OpenSSL 0.9.8
+         if ssl.OPENSSL_VERSION_INFO < (0, 9, 8, 0, 15):
+             self.skipTest("SHA256 not available on %r" % ssl.OPENSSL_VERSION)
+-        # NOTE: https://sha256.tbs-internet.com is another possible test host
++        self.skipTest("remote host needs SNI, only available on Python 3.2+")
++        # NOTE: https://sha2.hboeck.de is another possible test host
+         remote = ("sha256.tbs-internet.com", 443)
+         sha256_cert = os.path.join(os.path.dirname(__file__), "sha256.pem")
+         with test_support.transient_internet("sha256.tbs-internet.com"):

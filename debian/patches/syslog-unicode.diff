@@ -1,0 +1,17 @@
+http://bugs.python.org/issue15462
+http://hg.python.org/cpython/rev/af46a001d5ec
+https://bugs.launchpad.net/ubuntu/+source/python2.7/+bug/1029640/
+
+Index: python2.7-2.7.3/Lib/logging/handlers.py
+===================================================================
+--- python2.7-2.7.3.orig/Lib/logging/handlers.py	2012-04-09 19:07:30.000000000 -0400
++++ python2.7-2.7.3/Lib/logging/handlers.py	2012-07-27 22:53:22.200868302 -0400
+@@ -798,8 +798,6 @@
+         # Message is a string. Convert to bytes as required by RFC 5424
+         if type(msg) is unicode:
+             msg = msg.encode('utf-8')
+-            if codecs:
+-                msg = codecs.BOM_UTF8 + msg
+         msg = prio + msg
+         try:
+             if self.unixsocket:
