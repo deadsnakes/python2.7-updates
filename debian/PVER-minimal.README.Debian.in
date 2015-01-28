@@ -25,6 +25,7 @@ are:
   _ssl			extension
   _struct		extension
   _symtable		builtin
+  _sysconfigdata		module
   _types		builtin
   _warnings		builtin
   _weakref		extension
@@ -44,6 +45,7 @@ are:
   codecs		module
   collections		module
   compileall		module
+  contextlib		module
   copy			module
   copy_reg		module
   dis			module

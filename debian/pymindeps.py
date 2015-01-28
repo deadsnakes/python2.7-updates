@@ -120,9 +120,11 @@ excluded_imports = {
     'pickle': set(('doctest',)),
     'platform': set(('plistlib', 'tempfile')),
     #'socket': set(('_ssl', 'ssl')),
+    'ssl': set(('calendar',)),
     'tempfile': set(('dummy_thread',)),
     'subprocess': set(('threading',)),
     'shutil': set(('distutils', 'tarfile', 'zipfile')),
+    'sysconfig': set(('pprint', '_osx_support')),
     }
 
 def main(argv):
