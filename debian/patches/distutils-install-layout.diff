@@ -4,7 +4,7 @@
 
 --- a/Doc/install/index.rst
 +++ b/Doc/install/index.rst
-@@ -240,6 +240,8 @@
+@@ -250,6 +250,8 @@
  +-----------------+-----------------------------------------------------+--------------------------------------------------+-------+
  | Platform        | Standard installation location                      | Default value                                    | Notes |
  +=================+=====================================================+==================================================+=======+
@@ -13,7 +13,7 @@
  | Unix (pure)     | :file:`{prefix}/lib/python{X.Y}/site-packages`      | :file:`/usr/local/lib/python{X.Y}/site-packages` | \(1)  |
  +-----------------+-----------------------------------------------------+--------------------------------------------------+-------+
  | Unix (non-pure) | :file:`{exec-prefix}/lib/python{X.Y}/site-packages` | :file:`/usr/local/lib/python{X.Y}/site-packages` | \(1)  |
-@@ -249,6 +251,14 @@
+@@ -259,6 +261,14 @@
  
  Notes:
  
@@ -28,7 +28,7 @@
  (1)
     Most Linux distributions include Python as a standard part of the system, so
     :file:`{prefix}` and :file:`{exec-prefix}` are usually both :file:`/usr` on
-@@ -433,6 +443,15 @@
+@@ -443,6 +453,15 @@
  
     /usr/bin/python setup.py install --prefix=/usr/local
  
@@ -44,7 +44,7 @@
  Another possibility is a network filesystem where the name used to write to a
  remote directory is different from the name used to read it: for example, the
  Python interpreter accessed as :file:`/usr/local/bin/python` might search for
-@@ -684,6 +703,17 @@
+@@ -694,6 +713,17 @@
  import them, this directory must be added to ``sys.path``.  There are several
  different ways to add the directory.
  
@@ -193,7 +193,7 @@
  
 --- a/Lib/distutils/sysconfig.py
 +++ b/Lib/distutils/sysconfig.py
-@@ -110,6 +110,7 @@
+@@ -115,6 +115,7 @@
      If 'prefix' is supplied, use it instead of sys.prefix or
      sys.exec_prefix -- i.e., ignore 'plat_specific'.
      """
@@ -201,7 +201,7 @@
      if prefix is None:
          prefix = plat_specific and EXEC_PREFIX or PREFIX
  
-@@ -118,6 +119,8 @@
+@@ -123,6 +124,8 @@
                                   "lib", "python" + get_python_version())
          if standard_lib:
              return libpython
@@ -212,7 +212,7 @@
  
 --- a/Lib/site.py
 +++ b/Lib/site.py
-@@ -285,6 +285,13 @@
+@@ -273,6 +273,13 @@
  
      if ENABLE_USER_SITE and os.path.isdir(user_site):
          addsitedir(user_site, known_paths)
@@ -255,7 +255,7 @@
      'posix_home': {
          'stdlib': '{base}/lib/python',
          'platstdlib': '{base}/lib/python',
-@@ -125,7 +145,7 @@
+@@ -129,7 +149,7 @@
  _PYTHON_BUILD = is_python_build()
  
  if _PYTHON_BUILD:
@@ -264,7 +264,7 @@
          _INSTALL_SCHEMES[scheme]['include'] = '{projectbase}/Include'
          _INSTALL_SCHEMES[scheme]['platinclude'] = '{srcdir}'
  
-@@ -159,8 +179,11 @@
+@@ -163,8 +183,11 @@
  
  def _get_default_scheme():
      if os.name == 'posix':
@@ -278,16 +278,16 @@
      return os.name
  
  def _getuserbase():
-@@ -276,7 +299,7 @@
- def _get_makefile_filename():
+@@ -310,7 +333,7 @@
+     """Return the path of the Makefile."""
      if _PYTHON_BUILD:
          return os.path.join(_PROJECT_BASE, "Makefile")
 -    return os.path.join(get_path('platstdlib'), "config", "Makefile")
 +    return os.path.join(get_path('platstdlib').replace("/usr/local","/usr",1), "config", "Makefile")
  
- 
- def _init_posix(vars):
-@@ -361,7 +384,7 @@
+ # Issue #22199: retain undocumented private name for compatibility
+ _get_makefile_filename = get_makefile_filename
+@@ -442,7 +465,7 @@
          else:
              inc_dir = _PROJECT_BASE
      else:
@@ -298,9 +298,9 @@
  def get_scheme_names():
 --- a/Lib/test/test_site.py
 +++ b/Lib/test/test_site.py
-@@ -230,10 +230,13 @@
-             self.assertEqual(dirs[0], wanted)
+@@ -242,10 +242,13 @@
          elif os.sep == '/':
+             # OS X non-framwework builds, Linux, FreeBSD, etc
              self.assertEqual(len(dirs), 2)
 -            wanted = os.path.join('xoxo', 'lib', 'python' + sys.version[:3],
 -                                  'site-packages')
@@ -314,10 +314,10 @@
 +                                  'dist-packages')
              self.assertEqual(dirs[1], wanted)
          else:
-             self.assertEqual(len(dirs), 2)
+             # other platforms
 --- a/Lib/test/test_sysconfig.py
 +++ b/Lib/test/test_sysconfig.py
-@@ -230,8 +230,8 @@
+@@ -239,8 +239,8 @@
          self.assertTrue(os.path.isfile(config_h), config_h)
  
      def test_get_scheme_names(self):
@@ -327,19 +327,19 @@
 +                  'posix_home', 'posix_local', 'posix_prefix', 'posix_user')
          self.assertEqual(get_scheme_names(), wanted)
  
-     def test_symlink(self):
+     @unittest.skipIf(sys.platform.startswith('win'),
 --- a/Lib/distutils/tests/test_install.py
 +++ b/Lib/distutils/tests/test_install.py
-@@ -196,7 +196,7 @@
+@@ -193,7 +193,7 @@
  
          found = [os.path.basename(line) for line in content.splitlines()]
-         expected = ['hello',
+         expected = ['hello.py', 'hello.pyc', 'sayhi',
 -                    'UNKNOWN-0.0.0-py%s.%s.egg-info' % sys.version_info[:2]]
 +                    'UNKNOWN-0.0.0.egg-info']
          self.assertEqual(found, expected)
  
      def test_record_extensions(self):
-@@ -227,7 +227,7 @@
+@@ -223,7 +223,7 @@
  
          found = [os.path.basename(line) for line in content.splitlines()]
          expected = [_make_ext_name('xx'),

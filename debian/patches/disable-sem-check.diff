@@ -1,7 +1,7 @@
 # DP: Assume working semaphores on Linux, don't rely on running kernel for the check.
 
---- a/configure.in
-+++ b/configure.in
+--- a/configure.ac
++++ b/configure.ac
 @@ -3645,6 +3645,11 @@
  [ac_cv_posix_semaphores_enabled=no],
  [ac_cv_posix_semaphores_enabled=yes])

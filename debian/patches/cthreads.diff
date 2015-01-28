@@ -1,7 +1,7 @@
 # DP: Remove cthreads detection
 
---- a/configure.in
-+++ b/configure.in
+--- a/configure.ac
++++ b/configure.ac
 @@ -2154,7 +2154,6 @@
  
  # Templates for things AC_DEFINEd more than once.

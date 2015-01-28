@@ -1,7 +1,7 @@
 # DP: disable check for utimes function, which is broken in glibc-2.3.2
 
---- a/configure.in
-+++ b/configure.in
+--- a/configure.ac
++++ b/configure.ac
 @@ -2698,7 +2698,7 @@
   setsid setpgid setpgrp setuid setvbuf snprintf \
   sigaction siginterrupt sigrelse strftime \
