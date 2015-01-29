@@ -717,7 +717,7 @@ endif
 
 	: # Install sitecustomize.py.
 	cp -p debian/sitecustomize.py $(d_min)/etc/$(PVER)/
-	patch --no-backup -d $(d_min)/$(scriptdir) < debian/patches/site-builddir.diff
+	#patch --no-backup -d $(d_min)/$(scriptdir) < debian/patches/site-builddir.diff
 	dh_link -p$(p_min) /etc/$(PVER)/sitecustomize.py \
 		/$(scriptdir)/sitecustomize.py
 
