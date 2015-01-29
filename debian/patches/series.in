@@ -69,3 +69,4 @@ xdg-gvfs-open.diff
 CVE-2014-1912.diff
 // syslog.diff
 build-libpython.diff
+sphinx1.1-build.diff
