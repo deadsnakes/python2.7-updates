@@ -73,8 +73,8 @@ Multi-Arch: same
 Priority: @MINPRIO@
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: lib@PVER@-stdlib
-Replaces: @PVER@ (<< 2.7.4-2), @PVER@-minimal (<< 2.7.3-10), lib@PVER@-stdlib (<< 2.7.4-2)
-Breaks: @PVER@-minimal (<< 2.7.4~rc1-1~)
+Replaces: @PVER@ (<< 2.7.4-2), @PVER@-minimal (<< 2.7.3-10), lib@PVER@-stdlib (<< 2.7.4-2), lib@PVER@-stdlib ( << 2.7.9)
+Breaks: @PVER@-minimal (<< 2.7.4~rc1-1~), lib@PVER@-stdlib ( << 2.7.9)
 Conflicts: binfmt-support (<< 1.1.2)
 Description: Minimal subset of the Python language (version @VER@)
  This package contains some essential modules. It is normally not

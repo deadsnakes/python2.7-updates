@@ -73,8 +73,8 @@ Multi-Arch: same
 Priority: standard
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libpython2.7-stdlib
-Replaces: python2.7 (<< 2.7.4-2), python2.7-minimal (<< 2.7.3-10), libpython2.7-stdlib (<< 2.7.4-2)
-Breaks: python2.7-minimal (<< 2.7.4~rc1-1~)
+Replaces: python2.7 (<< 2.7.4-2), python2.7-minimal (<< 2.7.3-10), libpython2.7-stdlib (<< 2.7.4-2), libpython2.7-stdlib ( << 2.7.9)
+Breaks: python2.7-minimal (<< 2.7.4~rc1-1~), libpython2.7-stdlib ( << 2.7.9)
 Conflicts: binfmt-support (<< 1.1.2)
 Description: Minimal subset of the Python language (version 2.7)
  This package contains some essential modules. It is normally not
