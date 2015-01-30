@@ -1,3 +1,16 @@
+python2.7 (2.7.9-0~precise1) precise; urgency=medium
+
+  * Update to Python 2.7.9.
+    - Python 2.7 maintenance releases will receive select security feature
+      backports from the Python 3 series, as described in PEP 466:
+      https://www.python.org/dev/peps/pep-0466/
+      See the PEP for the exact features this concerns.
+    - Python 2.7.9 includes the ``ensurepip`` module from Python 3.4 (PEP 477,
+      https://www.python.org/dev/peps/pep-0477/). This package includes a
+      "disabled" version that simply points to ``python-pip``.
+
+ -- Felix Krull <f_krull@gmx.de>  Fri, 30 Jan 2015 15:28:28 +0100
+
 python2.7 (2.7.3-0ubuntu3.6) precise-proposed; urgency=medium
 
   * Ensure failed connections to /dev/log are full closed, preventing
