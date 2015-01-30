@@ -1055,6 +1055,7 @@
  _PyObject_Str@Base @VER@
  _PyParser_Grammar@Base @VER@
  _PyParser_TokenNames@Base @VER@
+ _PyRandom_Fini@Base 2.7.9
  _PyRandom_Init@Base @VER@
  _PySequence_IterSearch@Base @VER@
  _PySet_Next@Base @VER@
@@ -1066,6 +1067,7 @@
  _PyString_InsertThousandsGrouping@Base @VER@
  _PyString_Join@Base @VER@
  _PyString_Resize@Base @VER@
+ _PySys_GetSizeOf@Base 2.7.9
  _PySys_Init@Base @VER@
  _PyThreadState_Current@Base @VER@
  _PyThreadState_GetFrame@Base @VER@
