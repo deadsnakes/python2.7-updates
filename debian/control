@@ -1,7 +1,8 @@
 Source: python2.7
 Section: python
 Priority: optional
-Maintainer: Matthias Klose <doko@debian.org>
+Maintainer: Felix Krull <f_krull@gmx.de>
+#Maintainer: Matthias Klose <doko@debian.org>
 Build-Depends: debhelper (>= 5), quilt, autoconf, lsb-release, sharutils,
   libreadline-dev, libtinfo-dev, libncursesw5-dev (>= 5.3),
   tk-dev, blt-dev (>= 2.4z), libssl-dev,
@@ -18,8 +19,10 @@ Build-Depends: debhelper (>= 5), quilt, autoconf, lsb-release, sharutils,
 Build-Depends-Indep: python-sphinx
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, python2.7-xml, python-xml, autoconf2.13, python-cxx-dev
 Standards-Version: 3.9.5
-Vcs-Browser: https://code.launchpad.net/~doko/python/pkg2.7-debian
-Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg2.7-debian
+Vcs-Browser: https://bitbucket.org/fk/deadsnakes-python2.7-updates
+Vcs-Hg: https://bitbucket.org/fk/deadsnakes-python2.7-updates
+#Vcs-Browser: https://code.launchpad.net/~doko/python/pkg2.7-debian
+#Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg2.7-debian
 XS-Testsuite: autopkgtest
 
 Package: python2.7
