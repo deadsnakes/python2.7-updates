@@ -1,7 +1,8 @@
 Source: @PVER@
 Section: python
 Priority: optional
-Maintainer: Matthias Klose <doko@debian.org>
+Maintainer: Felix Krull <f_krull@gmx.de>
+#Maintainer: Matthias Klose <doko@debian.org>
 Build-Depends: debhelper (>= 5), @bd_dpkgdev@
   quilt, autoconf, autotools-dev,
   lsb-release, sharutils,
@@ -19,8 +20,10 @@ Build-Depends: debhelper (>= 5), @bd_dpkgdev@
 Build-Depends-Indep: python-sphinx
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, @PVER@-xml, python-xml, autoconf2.13, python-cxx-dev
 Standards-Version: 3.9.6
-Vcs-Browser: https://code.launchpad.net/~doko/python/pkg@VER@-debian
-Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg@VER@-debian
+Vcs-Browser: https://bitbucket.org/fk/deadsnakes-python2.7-updates
+Vcs-Hg: https://bitbucket.org/fk/deadsnakes-python2.7-updates
+#Vcs-Browser: https://code.launchpad.net/~doko/python/pkg@VER@-debian
+#Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg@VER@-debian
 XS-Testsuite: autopkgtest
 
 Package: @PVER@
