@@ -1,4 +1,4 @@
-hg-updates.diff
+//hg-updates.diff
 issue9189.diff
 build-libpython.diff
 deb-setup.diff
@@ -62,4 +62,4 @@ atomic-pyc-rename.diff
 revert-unittest-loader-symlinks19352.diff
 enable-sqlite-loadext.diff
 installed-testsuite.diff
-issue21963.diff
+//issue21963.diff
