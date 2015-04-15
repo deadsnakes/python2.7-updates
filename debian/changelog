@@ -1,4 +1,4 @@
-python2.7 (2.7.9-0~trusty1) trusty; urgency=medium
+python2.7 (2.7.9-0+trusty1) trusty; urgency=medium
 
   * Update to Python 2.7.9.
     - Python 2.7 maintenance releases will receive select security feature
@@ -9,7 +9,7 @@ python2.7 (2.7.9-0~trusty1) trusty; urgency=medium
       https://www.python.org/dev/peps/pep-0477/). This package includes a
       "disabled" version that simply points to ``python-pip``.
 
- -- Felix Krull <f_krull@gmx.de>  Fri, 30 Jan 2015 22:29:09 +0100
+ -- Felix Krull <f_krull@gmx.de>  Wed, 15 Apr 2015 13:17:50 +0200
 
 python2.7 (2.7.6-8) unstable; urgency=medium
 
