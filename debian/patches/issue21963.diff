@@ -1,0 +1,152 @@
+Index: b/Include/pythonrun.h
+===================================================================
+--- a/Include/pythonrun.h
++++ b/Include/pythonrun.h
+@@ -147,8 +147,6 @@ PyAPI_FUNC(void) PyOS_FiniInterrupts(voi
+ PyAPI_FUNC(void) PyByteArray_Fini(void);
+ PyAPI_FUNC(void) _PyRandom_Fini(void);
+ 
+-PyAPI_DATA(PyThreadState *) _Py_Finalizing;
+-
+ /* Stuff with no proper home (yet) */
+ PyAPI_FUNC(char *) PyOS_Readline(FILE *, FILE *, char *);
+ PyAPI_DATA(int) (*PyOS_InputHook)(void);
+Index: b/Lib/test/test_threading.py
+===================================================================
+--- a/Lib/test/test_threading.py
++++ b/Lib/test/test_threading.py
+@@ -700,49 +700,6 @@ class ThreadJoinOnShutdown(BaseTestCase)
+         output = "end of worker thread\nend of main thread\n"
+         self.assertScriptHasOutput(script, output)
+ 
+-    @unittest.skipIf(sys.platform in platforms_to_skip, "due to known OS bug")
+-    def test_6_daemon_threads(self):
+-        # Check that a daemon thread cannot crash the interpreter on shutdown
+-        # by manipulating internal structures that are being disposed of in
+-        # the main thread.
+-        script = """if True:
+-            import os
+-            import random
+-            import sys
+-            import time
+-            import threading
+-
+-            thread_has_run = set()
+-
+-            def random_io():
+-                '''Loop for a while sleeping random tiny amounts and doing some I/O.'''
+-                while True:
+-                    in_f = open(os.__file__, 'rb')
+-                    stuff = in_f.read(200)
+-                    null_f = open(os.devnull, 'wb')
+-                    null_f.write(stuff)
+-                    time.sleep(random.random() / 1995)
+-                    null_f.close()
+-                    in_f.close()
+-                    thread_has_run.add(threading.current_thread())
+-
+-            def main():
+-                count = 0
+-                for _ in range(40):
+-                    new_thread = threading.Thread(target=random_io)
+-                    new_thread.daemon = True
+-                    new_thread.start()
+-                    count += 1
+-                while len(thread_has_run) < count:
+-                    time.sleep(0.001)
+-                # Trigger process shutdown
+-                sys.exit(0)
+-
+-            main()
+-            """
+-        rc, out, err = assert_python_ok('-c', script)
+-        self.assertFalse(err)
+-
+     @unittest.skipUnless(hasattr(os, 'fork'), "needs os.fork()")
+     @unittest.skipIf(sys.platform in platforms_to_skip, "due to known OS bug")
+     def test_reinit_tls_after_fork(self):
+Index: b/Python/ceval.c
+===================================================================
+--- a/Python/ceval.c
++++ b/Python/ceval.c
+@@ -355,12 +355,6 @@ PyEval_RestoreThread(PyThreadState *tsta
+     if (interpreter_lock) {
+         int err = errno;
+         PyThread_acquire_lock(interpreter_lock, 1);
+-        /* _Py_Finalizing is protected by the GIL */
+-        if (_Py_Finalizing && tstate != _Py_Finalizing) {
+-            PyThread_release_lock(interpreter_lock);
+-            PyThread_exit_thread();
+-            assert(0);  /* unreachable */
+-        }
+         errno = err;
+     }
+ #endif
+@@ -1025,12 +1019,6 @@ PyEval_EvalFrameEx(PyFrameObject *f, int
+ 
+                 PyThread_acquire_lock(interpreter_lock, 1);
+ 
+-                /* Check if we should make a quick exit. */
+-                if (_Py_Finalizing && _Py_Finalizing != tstate) {
+-                    PyThread_release_lock(interpreter_lock);
+-                    PyThread_exit_thread();
+-                }
+-
+                 if (PyThreadState_Swap(tstate) != NULL)
+                     Py_FatalError("ceval: orphan tstate");
+ 
+Index: b/Python/pythonrun.c
+===================================================================
+--- a/Python/pythonrun.c
++++ b/Python/pythonrun.c
+@@ -91,8 +91,6 @@ int _Py_QnewFlag = 0;
+ int Py_NoUserSiteDirectory = 0; /* for -s and site.py */
+ int Py_HashRandomizationFlag = 0; /* for -R and PYTHONHASHSEED */
+ 
+-PyThreadState *_Py_Finalizing = NULL;
+-
+ 
+ /* Hack to force loading of object files */
+ int (*_PyOS_mystrnicmp_hack)(const char *, const char *, Py_ssize_t) = \
+@@ -165,7 +163,6 @@ Py_InitializeEx(int install_sigs)
+     if (initialized)
+         return;
+     initialized = 1;
+-    _Py_Finalizing = NULL;
+ 
+     if ((p = Py_GETENV("PYTHONDEBUG")) && *p != '\0')
+         Py_DebugFlag = add_flag(Py_DebugFlag, p);
+@@ -425,16 +422,12 @@ Py_Finalize(void)
+      * the threads created via Threading.
+      */
+     call_sys_exitfunc();
++    initialized = 0;
+ 
+     /* Get current thread state and interpreter pointer */
+     tstate = PyThreadState_GET();
+     interp = tstate->interp;
+ 
+-    /* Remaining threads (e.g. daemon threads) will automatically exit
+-       after taking the GIL (in PyEval_RestoreThread()). */
+-    _Py_Finalizing = tstate;
+-    initialized = 0;
+-
+     /* Disable signal handling */
+     PyOS_FiniInterrupts();
+ 
+Index: b/Python/thread_pthread.h
+===================================================================
+--- a/Python/thread_pthread.h
++++ b/Python/thread_pthread.h
+@@ -242,9 +242,9 @@ void
+ PyThread_exit_thread(void)
+ {
+     dprintf(("PyThread_exit_thread called\n"));
+-    if (!initialized)
++    if (!initialized) {
+         exit(0);
+-    pthread_exit(0);
++    }
+ }
+ 
+ #ifdef USE_SEMAPHORES
