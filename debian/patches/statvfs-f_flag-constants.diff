@@ -9,11 +9,9 @@ you, so add them here.
  Modules/posixmodule.c |   37 +++++++++++++++++++++++++++++++++++++
  1 files changed, 37 insertions(+), 0 deletions(-)
 
-Index: b/Modules/posixmodule.c
-===================================================================
 --- a/Modules/posixmodule.c
 +++ b/Modules/posixmodule.c
-@@ -9356,6 +9356,43 @@ all_ins(PyObject *d)
+@@ -9356,6 +9356,43 @@
      if (ins(d, "EX_NOTFOUND", (long)EX_NOTFOUND)) return -1;
  #endif /* EX_NOTFOUND */
  

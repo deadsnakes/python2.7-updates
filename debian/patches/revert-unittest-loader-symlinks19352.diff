@@ -1,11 +1,9 @@
 Description: DP: Revert patch from http://bugs.python.org/issue19352 as it completely breaks unittest discovery on Debian/Ubuntu
 Bug-Ubuntu: https://launchpad.net/bugs/1255505
 
-Index: b/Lib/unittest/loader.py
-===================================================================
 --- a/Lib/unittest/loader.py
 +++ b/Lib/unittest/loader.py
-@@ -256,8 +256,8 @@ class TestLoader(object):
+@@ -256,8 +256,8 @@
                      yield _make_failed_import_test(name, self.suiteClass)
                  else:
                      mod_file = os.path.abspath(getattr(module, '__file__', full_path))
@@ -16,11 +14,9 @@ Index: b/Lib/unittest/loader.py
                      if realpath.lower() != fullpath_noext.lower():
                          module_dir = os.path.dirname(realpath)
                          mod_name = os.path.splitext(os.path.basename(full_path))[0]
-Index: b/Lib/unittest/test/test_discovery.py
-===================================================================
 --- a/Lib/unittest/test/test_discovery.py
 +++ b/Lib/unittest/test/test_discovery.py
-@@ -315,7 +315,7 @@ class TestDiscovery(unittest.TestCase):
+@@ -315,7 +315,7 @@
          self.assertTrue(program.failfast)
          self.assertTrue(program.catchbreak)
  
@@ -29,7 +25,7 @@ Index: b/Lib/unittest/test/test_discovery.py
          class Module(object):
              __file__ = 'bar/foo.py'
          sys.modules['foo'] = Module
-@@ -342,10 +342,7 @@ class TestDiscovery(unittest.TestCase):
+@@ -342,10 +342,7 @@
          os.listdir = listdir
          os.path.isfile = isfile
          os.path.isdir = isdir
@@ -40,7 +36,7 @@ Index: b/Lib/unittest/test/test_discovery.py
          loader = unittest.TestLoader()
  
          mod_dir = os.path.abspath('bar')
-@@ -358,25 +355,6 @@ class TestDiscovery(unittest.TestCase):
+@@ -358,25 +355,6 @@
          )
          self.assertEqual(sys.path[0], full_path)
  

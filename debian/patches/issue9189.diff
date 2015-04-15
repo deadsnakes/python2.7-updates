@@ -1,8 +1,6 @@
-Index: b/Lib/sysconfig.py
-===================================================================
 --- a/Lib/sysconfig.py
 +++ b/Lib/sysconfig.py
-@@ -231,11 +231,19 @@ def _parse_makefile(filename, vars=None)
+@@ -231,11 +231,19 @@
                      done[n] = v
  
      # do variable interpolation here
@@ -25,7 +23,7 @@ Index: b/Lib/sysconfig.py
                  n = m.group(1)
                  found = True
                  if n in done:
-@@ -246,23 +254,48 @@ def _parse_makefile(filename, vars=None)
+@@ -246,23 +254,48 @@
                  elif n in os.environ:
                      # do it like make: fall back to environment
                      item = os.environ[n]
@@ -78,11 +76,9 @@ Index: b/Lib/sysconfig.py
      # strip spurious spaces
      for k, v in done.items():
          if isinstance(v, str):
-Index: b/Makefile.pre.in
-===================================================================
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -68,12 +68,18 @@ MAKESETUP=      $(srcdir)/Modules/makese
+@@ -68,12 +68,18 @@
  # Compiler options
  OPT=		@OPT@
  BASECFLAGS=	@BASECFLAGS@
@@ -104,7 +100,7 @@ Index: b/Makefile.pre.in
  LDLAST=		@LDLAST@
  SGI_ABI=	@SGI_ABI@
  CCSHARED=	@CCSHARED@
-@@ -82,7 +88,7 @@ ARFLAGS=	@ARFLAGS@
+@@ -82,7 +88,7 @@
  # Extra C flags added for building the interpreter object files.
  CFLAGSFORSHARED=@CFLAGSFORSHARED@
  # C flags used for building the interpreter object files
@@ -113,7 +109,7 @@ Index: b/Makefile.pre.in
  
  
  # Machine-dependent subdirectories
-@@ -437,7 +443,7 @@ coverage:
+@@ -440,7 +446,7 @@
  
  # Build the interpreter
  $(BUILDPYTHON):	Modules/python.o $(LIBRARY) $(LDLIBRARY)
@@ -122,7 +118,7 @@ Index: b/Makefile.pre.in
  			Modules/python.o \
  			$(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
  
-@@ -469,7 +475,7 @@ sharedmods: $(BUILDPYTHON) pybuilddir.tx
+@@ -472,7 +478,7 @@
  	    *\ -s*|s*) quiet="-q";; \
  	    *) quiet="";; \
  	esac; \
@@ -131,7 +127,7 @@ Index: b/Makefile.pre.in
  		_TCLTK_INCLUDES='$(TCLTK_INCLUDES)' _TCLTK_LIBS='$(TCLTK_LIBS)' \
  		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py $$quiet build
  
-@@ -487,18 +493,18 @@ $(LIBRARY): $(LIBRARY_OBJS)
+@@ -490,18 +496,18 @@
  
  libpython$(VERSION).so: $(LIBRARY_OBJS)
  	if test $(INSTSONAME) != $(LDLIBRARY); then \
@@ -154,7 +150,7 @@ Index: b/Makefile.pre.in
  
  # Copy up the gdb python hooks into a position where they can be automatically
  # loaded by gdb during Lib/test/test_gdb.py
-@@ -537,7 +543,7 @@ $(PYTHONFRAMEWORKDIR)/Versions/$(VERSION
+@@ -540,7 +546,7 @@
  # for a shared core library; otherwise, this rule is a noop.
  $(DLLLIBRARY) libpython$(VERSION).dll.a: $(LIBRARY_OBJS)
  	if test -n "$(DLLLIBRARY)"; then \
@@ -163,7 +159,7 @@ Index: b/Makefile.pre.in
  			$(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST); \
  	else true; \
  	fi
-@@ -581,7 +587,7 @@ Modules/getbuildinfo.o: $(PARSER_OBJS) \
+@@ -584,7 +590,7 @@
  		$(SIGNAL_OBJS) \
  		$(MODOBJS) \
  		$(srcdir)/Modules/getbuildinfo.c
@@ -172,7 +168,7 @@ Index: b/Makefile.pre.in
  	      -DSVNVERSION="\"`LC_ALL=C $(SVNVERSION)`\"" \
  	      -DHGVERSION="\"`LC_ALL=C $(HGVERSION)`\"" \
  	      -DHGTAG="\"`LC_ALL=C $(HGTAG)`\"" \
-@@ -589,7 +595,7 @@ Modules/getbuildinfo.o: $(PARSER_OBJS) \
+@@ -592,7 +598,7 @@
  	      -o $@ $(srcdir)/Modules/getbuildinfo.c
  
  Modules/getpath.o: $(srcdir)/Modules/getpath.c Makefile
@@ -181,7 +177,7 @@ Index: b/Makefile.pre.in
  		-DPREFIX='"$(prefix)"' \
  		-DEXEC_PREFIX='"$(exec_prefix)"' \
  		-DVERSION='"$(VERSION)"' \
-@@ -597,7 +603,7 @@ Modules/getpath.o: $(srcdir)/Modules/get
+@@ -600,7 +606,7 @@
  		-o $@ $(srcdir)/Modules/getpath.c
  
  Modules/python.o: $(srcdir)/Modules/python.c
@@ -190,7 +186,7 @@ Index: b/Makefile.pre.in
  
  Modules/posixmodule.o: $(srcdir)/Modules/posixmodule.c $(srcdir)/Modules/posixmodule.h
  
-@@ -614,7 +620,7 @@ $(GRAMMAR_C): $(GRAMMAR_H) $(GRAMMAR_INP
+@@ -617,7 +623,7 @@
  		touch $(GRAMMAR_C)
  
  $(PGEN):	$(PGENOBJS)
@@ -199,7 +195,7 @@ Index: b/Makefile.pre.in
  
  Parser/grammar.o:	$(srcdir)/Parser/grammar.c \
  				$(srcdir)/Include/token.h \
-@@ -636,10 +642,10 @@ $(AST_C): $(AST_ASDL) $(ASDLGEN_FILES)
+@@ -639,10 +645,10 @@
  Python/compile.o Python/symtable.o Python/ast.o: $(GRAMMAR_H) $(AST_H)
  
  Python/getplatform.o: $(srcdir)/Python/getplatform.c
@@ -212,7 +208,7 @@ Index: b/Makefile.pre.in
  
  Objects/unicodectype.o:	$(srcdir)/Objects/unicodectype.c \
  				$(srcdir)/Objects/unicodetype_db.h
-@@ -1244,7 +1250,7 @@ config.status:	$(srcdir)/configure
+@@ -1267,7 +1273,7 @@
  
  # Some make's put the object file in the current directory
  .c.o:
@@ -221,11 +217,9 @@ Index: b/Makefile.pre.in
  
  # Run reindent on the library
  reindent:
-Index: b/Modules/makesetup
-===================================================================
 --- a/Modules/makesetup
 +++ b/Modules/makesetup
-@@ -219,7 +219,7 @@ sed -e 's/[ 	]*#.*//' -e '/^[ 	]*$/d' |
+@@ -219,7 +219,7 @@
  			case $doconfig in
  			no)	cc="$cc \$(CCSHARED) \$(CFLAGS) \$(CPPFLAGS)";;
  			*)
@@ -234,11 +228,9 @@ Index: b/Modules/makesetup
  			esac
  			rule="$obj: $src; $cc $cpps -c $src -o $obj"
  			echo "$rule" >>$rulesf
-Index: b/configure.ac
-===================================================================
 --- a/configure.ac
 +++ b/configure.ac
-@@ -610,14 +610,13 @@ if test "$MACHDEP" = "irix6" && test "$C
+@@ -610,14 +610,13 @@
      fi
  fi
  
@@ -259,11 +251,9 @@ Index: b/configure.ac
  
  AC_SUBST(CXX)
  AC_SUBST(MAINCC)
-Index: b/Lib/distutils/sysconfig.py
-===================================================================
 --- a/Lib/distutils/sysconfig.py
 +++ b/Lib/distutils/sysconfig.py
-@@ -320,11 +320,19 @@ def parse_makefile(fn, g=None):
+@@ -320,11 +320,19 @@
                      done[n] = v
  
      # do variable interpolation here
@@ -286,7 +276,7 @@ Index: b/Lib/distutils/sysconfig.py
                  n = m.group(1)
                  found = True
                  if n in done:
-@@ -335,25 +343,47 @@ def parse_makefile(fn, g=None):
+@@ -335,25 +343,47 @@
                  elif n in os.environ:
                      # do it like make: fall back to environment
                      item = os.environ[n]

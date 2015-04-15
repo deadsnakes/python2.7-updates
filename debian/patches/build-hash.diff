@@ -1,10 +1,8 @@
 # DP: Always build the _md5, _sha1, _sha256 and _sha512 extension modules.
 
-Index: b/setup.py
-===================================================================
 --- a/setup.py
 +++ b/setup.py
-@@ -854,7 +854,7 @@ class PyBuildExt(build_ext):
+@@ -854,7 +854,7 @@
                  print ("warning: openssl 0x%08x is too old for _hashlib" %
                         openssl_ver)
                  missing.append('_hashlib')
@@ -13,7 +11,7 @@ Index: b/setup.py
              # The _sha module implements the SHA1 hash algorithm.
              exts.append( Extension('_sha', ['shamodule.c']) )
              # The _md5 module implements the RSA Data Security, Inc. MD5
-@@ -865,7 +865,7 @@ class PyBuildExt(build_ext):
+@@ -865,7 +865,7 @@
                              depends = ['md5.h']) )
  
          min_sha2_openssl_ver = 0x00908000

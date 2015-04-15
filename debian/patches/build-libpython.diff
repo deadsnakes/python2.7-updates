@@ -1,10 +1,8 @@
 # DP: Don't include object files twice in libpython.
 
-Index: b/Makefile.pre.in
-===================================================================
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -404,7 +404,7 @@ LIBRARY_OBJS=	\
+@@ -407,7 +407,7 @@
  		$(PYTHON_OBJS) \
  		$(MODULE_OBJS) \
  		$(SIGNAL_OBJS) \
@@ -13,7 +11,7 @@ Index: b/Makefile.pre.in
  
  #########################################################################
  # Rules
-@@ -488,7 +488,7 @@ $(LIBRARY): $(LIBRARY_OBJS)
+@@ -491,7 +491,7 @@
  	$(AR) $(ARFLAGS) $@ $(OBJECT_OBJS)
  	$(AR) $(ARFLAGS) $@ $(PYTHON_OBJS)
  	$(AR) $(ARFLAGS) $@ $(MODULE_OBJS) $(SIGNAL_OBJS)

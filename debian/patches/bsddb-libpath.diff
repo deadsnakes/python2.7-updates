@@ -1,10 +1,8 @@
 # DP: Don't add the bsddb multilib path, if already in the standard lib path
 
-Index: b/setup.py
-===================================================================
 --- a/setup.py
 +++ b/setup.py
-@@ -1070,7 +1070,13 @@ class PyBuildExt(build_ext):
+@@ -1070,7 +1070,13 @@
              if db_setup_debug:
                  print "bsddb using BerkeleyDB lib:", db_ver, dblib
                  print "bsddb lib dir:", dblib_dir, " inc dir:", db_incdir

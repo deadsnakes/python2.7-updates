@@ -1,8 +1,6 @@
-Index: b/Makefile.pre.in
-===================================================================
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -1078,6 +1078,8 @@ python-config: $(srcdir)/Misc/python-con
+@@ -1101,6 +1101,8 @@
  	# Substitution happens here, as the completely-expanded BINDIR
  	# is not available in configure
  	sed -e "s,@EXENAME@,$(BINDIR)/python$(VERSION)$(EXE)," < $(srcdir)/Misc/python-config.in >python-config
@@ -11,7 +9,7 @@ Index: b/Makefile.pre.in
  
  # Install the include files
  INCLDIRSTOMAKE=$(INCLUDEDIR) $(CONFINCLUDEDIR) $(INCLUDEPY) $(CONFINCLUDEPY)
-@@ -1137,6 +1139,7 @@ libainstall:	all python-config
+@@ -1160,6 +1162,7 @@
  	$(INSTALL_SCRIPT) $(srcdir)/install-sh $(DESTDIR)$(LIBPL)/install-sh
  	$(INSTALL_SCRIPT) python-config $(DESTDIR)$(BINDIR)/python$(VERSION)-config
  	rm python-config
@@ -19,11 +17,9 @@ Index: b/Makefile.pre.in
  	@if [ -s Modules/python.exp -a \
  		"`echo $(MACHDEP) | sed 's/^\(...\).*/\1/'`" = "aix" ]; then \
  		echo; echo "Installing support files for building shared extension modules on AIX:"; \
-Index: b/Misc/python-config.in
-===================================================================
 --- a/Misc/python-config.in
 +++ b/Misc/python-config.in
-@@ -56,3 +56,11 @@ for opt in opt_flags:
+@@ -56,3 +56,11 @@
                  libs.extend(getvar('LINKFORSHARED').split())
          print ' '.join(libs)
  
@@ -35,8 +31,6 @@ Index: b/Misc/python-config.in
 +
 +    elif opt == '--configdir':
 +        print sysconfig.get_config_var('LIBPL')
-Index: b/Misc/python-config.sh.in
-===================================================================
 --- /dev/null
 +++ b/Misc/python-config.sh.in
 @@ -0,0 +1,103 @@
@@ -143,11 +137,9 @@ Index: b/Misc/python-config.sh.in
 +        ;;
 +esac
 +done
-Index: b/configure.ac
-===================================================================
 --- a/configure.ac
 +++ b/configure.ac
-@@ -873,6 +873,7 @@ fi
+@@ -873,6 +873,7 @@
  
  # Other platforms follow
  if test $enable_shared = "yes"; then
@@ -155,7 +147,7 @@ Index: b/configure.ac
    AC_DEFINE(Py_ENABLE_SHARED, 1, [Defined if Python is built as a shared library.])
    case $ac_sys_system in
      BeOS*)
-@@ -933,6 +934,7 @@ if test $enable_shared = "yes"; then
+@@ -933,6 +934,7 @@
  
    esac
  else # shared is disabled
@@ -163,7 +155,7 @@ Index: b/configure.ac
    case $ac_sys_system in
      CYGWIN*)
            BLDLIBRARY='$(LIBRARY)'
-@@ -940,6 +942,7 @@ else # shared is disabled
+@@ -940,6 +942,7 @@
            ;;
    esac
  fi
@@ -171,8 +163,8 @@ Index: b/configure.ac
  
  if test "$cross_compiling" = yes; then
  	RUNSHARED=
-@@ -4571,7 +4574,7 @@ done
- AC_MSG_RESULT(done)
+@@ -4586,7 +4589,7 @@
+ AC_SUBST(ENSUREPIP)
  
  # generate output files
 -AC_CONFIG_FILES(Makefile.pre Modules/Setup.config Misc/python.pc)

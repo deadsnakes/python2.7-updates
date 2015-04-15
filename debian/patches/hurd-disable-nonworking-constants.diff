@@ -1,11 +1,9 @@
 # DP: Comment out constant exposed on the API which are not implemented on
 # DP: GNU/Hurd. They would not work at runtime anyway.
 
-Index: b/Modules/posixmodule.c
-===================================================================
 --- a/Modules/posixmodule.c
 +++ b/Modules/posixmodule.c
-@@ -9248,12 +9248,14 @@ all_ins(PyObject *d)
+@@ -9248,12 +9248,14 @@
  #ifdef O_LARGEFILE
      if (ins(d, "O_LARGEFILE", (long)O_LARGEFILE)) return -1;
  #endif
@@ -20,11 +18,9 @@ Index: b/Modules/posixmodule.c
  
  /* MS Windows */
  #ifdef O_NOINHERIT
-Index: b/Modules/socketmodule.c
-===================================================================
 --- a/Modules/socketmodule.c
 +++ b/Modules/socketmodule.c
-@@ -4903,9 +4903,11 @@ init_socket(void)
+@@ -4906,9 +4906,11 @@
  #ifdef  SO_OOBINLINE
      PyModule_AddIntConstant(m, "SO_OOBINLINE", SO_OOBINLINE);
  #endif

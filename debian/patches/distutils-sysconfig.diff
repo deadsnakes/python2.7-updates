@@ -1,11 +1,9 @@
 # DP: Allow setting BASECFLAGS, OPT and EXTRA_LDFLAGS (like, CC, CXX, CPP,
 # DP: CFLAGS, CPPFLAGS, CCSHARED, LDSHARED) from the environment.
 
-Index: b/Lib/distutils/sysconfig.py
-===================================================================
 --- a/Lib/distutils/sysconfig.py
 +++ b/Lib/distutils/sysconfig.py
-@@ -174,10 +174,12 @@ def customize_compiler(compiler):
+@@ -174,10 +174,12 @@
                  _osx_support.customize_compiler(_config_vars)
                  _config_vars['CUSTOMIZED_OSX_COMPILER'] = 'True'
  
@@ -22,7 +20,7 @@ Index: b/Lib/distutils/sysconfig.py
  
          if 'CC' in os.environ:
              newcc = os.environ['CC']
-@@ -198,13 +200,27 @@ def customize_compiler(compiler):
+@@ -198,13 +200,27 @@
              cpp = cc + " -E"           # not always
          if 'LDFLAGS' in os.environ:
              ldshared = ldshared + ' ' + os.environ['LDFLAGS']

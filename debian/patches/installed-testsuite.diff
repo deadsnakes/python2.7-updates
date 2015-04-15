@@ -3,11 +3,9 @@
 # DP:   - ctypes/test/test_macholib.py
 # DP:   - distutils/tests/test_bdist_wininst.py
 
-Index: b/Lib/distutils/tests/test_build_ext.py
-===================================================================
 --- a/Lib/distutils/tests/test_build_ext.py
 +++ b/Lib/distutils/tests/test_build_ext.py
-@@ -83,27 +83,6 @@ class BuildExtTestCase(support.TempdirMa
+@@ -83,27 +83,6 @@
          self.assertIsInstance(xx.Null(), xx.Null)
          self.assertIsInstance(xx.Str(), xx.Str)
  
