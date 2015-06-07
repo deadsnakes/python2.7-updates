@@ -927,6 +927,7 @@
  _PyDict_NewPresized@Base @VER@
  _PyDict_Next@Base @VER@
  _PyErr_BadInternalCall@Base @VER@
+ _PyErr_ReplaceException@Base 2.7.10
  _PyEval_CallTracing@Base @VER@
  _PyEval_SliceIndex@Base @VER@
  _PyExc_Fini@Base @VER@
