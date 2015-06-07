@@ -1,6 +1,6 @@
 --- a/Misc/python.man
 +++ b/Misc/python.man
-@@ -290,9 +290,9 @@
+@@ -289,9 +289,9 @@
  from that file;
  when called with
  .B \-c
@@ -12,7 +12,7 @@
  Here
  .I command
  may contain multiple statements separated by newlines.
-@@ -302,7 +302,7 @@
+@@ -301,7 +301,7 @@
  .PP
  If available, the script name and additional arguments thereafter are
  passed to the script in the Python variable
@@ -21,7 +21,7 @@
  which is a list of strings (you must first
  .I import sys
  to be able to access it).
-@@ -316,14 +316,14 @@
+@@ -315,14 +315,14 @@
  .I '-c'.
  Note that options interpreted by the Python interpreter itself
  are not placed in
@@ -38,7 +38,7 @@
  The interpreter quits when it reads an EOF at a prompt.
  When an unhandled exception occurs, a stack trace is printed and
  control returns to the primary prompt; in non-interactive mode, the
-@@ -382,7 +382,7 @@
+@@ -381,7 +381,7 @@
  inserted in the path in front of $PYTHONPATH.
  The search path can be manipulated from within a Python program as the
  variable
