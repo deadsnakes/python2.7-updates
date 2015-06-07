@@ -407,7 +407,7 @@ ifeq ($(on_buildd),yes)
   TEST_RESOURCES := $(TEST_RESOURCES),-network,-urlfetch,-bsddb
 endif
 TESTOPTS = -w -l -u$(TEST_RESOURCES)
-TEST_EXCLUDES =
+TEST_EXCLUDES = test_curses
 ifeq ($(on_buildd),yes)
   TEST_EXCLUDES += test_codecmaps_cn test_codecmaps_hk \
         test_codecmaps_jp test_codecmaps_kr test_codecmaps_tw \
