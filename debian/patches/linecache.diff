@@ -2,7 +2,7 @@
 
 --- a/Lib/linecache.py
 +++ b/Lib/linecache.py
-@@ -108,6 +108,11 @@
+@@ -112,6 +112,11 @@
          if os.path.isabs(filename):
              return []
  
