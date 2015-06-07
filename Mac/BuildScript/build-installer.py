@@ -237,9 +237,9 @@ def library_recipes():
 
         result.extend([
           dict(
-              name="OpenSSL 1.0.1j",
-              url="https://www.openssl.org/source/openssl-1.0.1j.tar.gz",
-              checksum='f7175c9cd3c39bb1907ac8bba9df8ed3',
+              name="OpenSSL 1.0.2a",
+              url="https://www.openssl.org/source/openssl-1.0.2a.tar.gz",
+              checksum='a06c547dac9044161a477211049f60ef',
               patches=[
                   "openssl_sdk_makedepend.patch",
                    ],
@@ -844,6 +844,11 @@ def build_universal_openssl(basedir, archList):
     separately then lipo them together into fat libraries.
     """
 
+    # OpenSSL fails to build with Xcode 2.5 (on OS X 10.4).
+    # If we are building on a 10.4.x or earlier system,
+    # unilaterally disable assembly code building to avoid the problem.
+    no_asm = int(platform.release().split(".")[0]) < 9
+
     def build_openssl_arch(archbase, arch):
         "Build one architecture of openssl"
         arch_opts = {
@@ -868,6 +873,8 @@ def build_universal_openssl(basedir, archList):
             "--prefix=%s"%os.path.join("/", *FW_VERSION_PREFIX),
             "--openssldir=/System/Library/OpenSSL",
         ]
+        if no_asm:
+            configure_opts.append("no-asm")
         runCommand(" ".join(["perl", "Configure"]
                         + arch_opts[arch] + configure_opts))
         runCommand("make depend OSX_SDK=%s" % SDKPATH)
@@ -1509,8 +1516,6 @@ def buildInstaller():
         else:
             patchFile(os.path.join('resources', fn), os.path.join(rsrcDir, fn))
 
-    shutil.copy("../../LICENSE", os.path.join(rsrcDir, 'License.txt'))
-
 
 def installSize(clear=False, _saved=[]):
     if clear:
@@ -1621,9 +1626,9 @@ def main():
     folder = os.path.join(WORKDIR, "_root", "Applications", "Python %s"%(
         getVersion(),))
     fn = os.path.join(folder, "License.rtf")
-    patchFile("resources/license.rtf",  fn)
+    patchFile("resources/License.rtf",  fn)
     fn = os.path.join(folder, "ReadMe.rtf")
-    patchFile("resources/readme.rtf",  fn)
+    patchFile("resources/ReadMe.rtf",  fn)
     fn = os.path.join(folder, "Update Shell Profile.command")
     patchScript("scripts/postflight.patch-profile",  fn)
     os.chmod(folder, STAT_0o755)
@@ -1633,10 +1638,12 @@ def main():
     buildInstaller()
 
     # And copy the readme into the directory containing the installer
-    patchFile('resources/ReadMe.txt', os.path.join(WORKDIR, 'installer', 'ReadMe.txt'))
+    patchFile('resources/ReadMe.rtf',
+                os.path.join(WORKDIR, 'installer', 'ReadMe.rtf'))
 
     # Ditto for the license file.
-    shutil.copy('../../LICENSE', os.path.join(WORKDIR, 'installer', 'License.txt'))
+    patchFile('resources/License.rtf',
+                os.path.join(WORKDIR, 'installer', 'License.rtf'))
 
     fp = open(os.path.join(WORKDIR, 'installer', 'Build.txt'), 'w')
     fp.write("# BUILD INFO\n")
