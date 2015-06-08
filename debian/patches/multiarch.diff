@@ -45,15 +45,6 @@
  
  Modules/Setup: $(srcdir)/Modules/Setup.dist
  	@if test -f Modules/Setup; then \
-@@ -954,7 +961,7 @@
- 	(cd $(DESTDIR)$(MANDIR)/man1; $(LN) -s python2.1 python.1)
- 
- # Install the library
--PLATDIR=	plat-$(MACHDEP)
-+PLATDIR=	plat-$(MULTIARCH)
- EXTRAPLATDIR= @EXTRAPLATDIR@
- EXTRAMACHDEPPATH=@EXTRAMACHDEPPATH@
- MACHDEPS=	$(PLATDIR) $(EXTRAPLATDIR)
 @@ -1115,10 +1122,10 @@
  
  # Install the library and miscellaneous stuff needed for extending/embedding
@@ -79,17 +70,6 @@
  # Declare targets that aren't real files
  .PHONY: all build_all sharedmods oldsharedmods test quicktest memtest
  .PHONY: install altinstall oldsharedinstall bininstall altbininstall
---- a/Modules/Setup.dist
-+++ b/Modules/Setup.dist
-@@ -91,7 +91,7 @@
- TESTPATH=
- 
- # Path components for machine- or system-dependent modules and shared libraries
--MACHDEPPATH=:plat-$(MACHDEP)
-+MACHDEPPATH=:plat-$(MULTIARCH)
- EXTRAMACHDEPPATH=
- 
- # Path component for the Tkinter-related modules
 --- a/Python/dynload_shlib.c
 +++ b/Python/dynload_shlib.c
 @@ -49,6 +49,12 @@
@@ -107,13 +87,26 @@
      {"module.so", "rb", C_EXTENSION},
 --- a/configure.ac
 +++ b/configure.ac
-@@ -675,6 +675,9 @@
- MULTIARCH=$($CC --print-multiarch 2>/dev/null)
- AC_SUBST(MULTIARCH)
+@@ -493,8 +493,11 @@
+ fi
+ AC_MSG_RESULT($MACHDEP)
  
 +MULTIARCH=$($CC --print-multiarch 2>/dev/null)
 +AC_SUBST(MULTIARCH)
 +
+ AC_SUBST(PLATDIR)
+-PLATDIR=plat-$MACHDEP
++PLATDIR=plat-$MULTIARCH
+ 
+ # And add extra plat-mac for darwin
+ AC_SUBST(EXTRAPLATDIR)
+@@ -675,9 +678,6 @@
+   ])
+ fi
+ 
+-MULTIARCH=$($CC --print-multiarch 2>/dev/null)
+-AC_SUBST(MULTIARCH)
+-
  
  # checks for UNIX variants that set C preprocessor variables
  AC_USE_SYSTEM_EXTENSIONS

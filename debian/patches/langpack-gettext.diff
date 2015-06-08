@@ -5,7 +5,7 @@
 
 --- a/Lib/gettext.py
 +++ b/Lib/gettext.py
-@@ -446,11 +446,26 @@
+@@ -449,11 +449,26 @@
          if lang == 'C':
              break
          mofile = os.path.join(localedir, lang, 'LC_MESSAGES', '%s.mo' % domain)

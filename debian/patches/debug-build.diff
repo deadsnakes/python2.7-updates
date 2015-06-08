@@ -137,7 +137,7 @@
          return NULL;
 --- a/configure.ac
 +++ b/configure.ac
-@@ -740,7 +740,7 @@
+@@ -743,7 +743,7 @@
  AC_MSG_CHECKING(LIBRARY)
  if test -z "$LIBRARY"
  then
@@ -146,7 +146,7 @@
  fi
  AC_MSG_RESULT($LIBRARY)
  
-@@ -886,8 +886,8 @@
+@@ -889,8 +889,8 @@
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
            ;;
      Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*|OpenBSD*)
@@ -157,7 +157,7 @@
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
  	  case $ac_sys_system in
  	      FreeBSD*)
-@@ -1030,6 +1030,12 @@
+@@ -1033,6 +1033,12 @@
  fi],
  [AC_MSG_RESULT(no)])
  
@@ -170,7 +170,7 @@
  # XXX Shouldn't the code above that fiddles with BASECFLAGS and OPT be
  # merged with this chunk of code?
  
-@@ -1919,7 +1925,7 @@
+@@ -1922,7 +1928,7 @@
  		esac
  		;;
  	CYGWIN*)   SO=.dll;;

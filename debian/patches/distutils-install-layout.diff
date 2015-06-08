@@ -372,7 +372,7 @@
          self.assertEqual(contents, sorted(wanted))
 --- a/Lib/pydoc.py
 +++ b/Lib/pydoc.py
-@@ -390,6 +390,7 @@
+@@ -391,6 +391,7 @@
                                   'marshal', 'posix', 'signal', 'sys',
                                   'thread', 'zipimport') or
               (file.startswith(basedir) and

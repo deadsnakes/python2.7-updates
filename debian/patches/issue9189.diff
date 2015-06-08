@@ -230,7 +230,7 @@
  			echo "$rule" >>$rulesf
 --- a/configure.ac
 +++ b/configure.ac
-@@ -610,14 +610,13 @@
+@@ -613,14 +613,13 @@
      fi
  fi
  

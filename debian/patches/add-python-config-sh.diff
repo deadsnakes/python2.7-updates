@@ -163,7 +163,7 @@
  
  if test "$cross_compiling" = yes; then
  	RUNSHARED=
-@@ -4586,7 +4589,7 @@
+@@ -4590,7 +4593,7 @@
  AC_SUBST(ENSUREPIP)
  
  # generate output files
