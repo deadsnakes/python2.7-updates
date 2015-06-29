@@ -49,7 +49,7 @@ TESTOPTS="-w -uall,-network,-urlfetch,-gui,-xpickle"
 TESTEXCLUSIONS=
 
 # test_curses: error: copywin() returned ERR
-TESTEXCLUSIONS="$TESTEXCLUSIONS test_curses"
+#TESTEXCLUSIONS="$TESTEXCLUSIONS test_curses"
 
 # test_distutils: failing tests test_parse_makefile_base, test_parse_makefile_literal_dollar
 TESTEXCLUSIONS="$TESTEXCLUSIONS test_distutils"
