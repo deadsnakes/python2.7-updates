@@ -34,7 +34,7 @@ TESTOPTS="-w -uall,-network,-urlfetch,-gui,-xpickle"
 TESTEXCLUSIONS=
 
 # test_curses: error: copywin() returned ERR
-TESTEXCLUSIONS="$TESTEXCLUSIONS test_curses"
+#TESTEXCLUSIONS="$TESTEXCLUSIONS test_curses"
 
 # test_distutils: Issue 17752, many failures in installed location
 TESTEXCLUSIONS="$TESTEXCLUSIONS test_distutils"
