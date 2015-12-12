@@ -1,22 +1,27 @@
 # DP: Fix profiled build; don't use Python/thread.gc*, gcc complains
 
---- a/Makefile.pre.in
-+++ b/Makefile.pre.in
-@@ -431,19 +431,19 @@
- 	$(MAKE) build_all_use_profile
+Index: python2.7-updates/Makefile.pre.in
+===================================================================
+--- python2.7-updates.orig/Makefile.pre.in
++++ python2.7-updates/Makefile.pre.in
+@@ -453,22 +453,22 @@ profile-opt:
+ 	$(MAKE) profile-removal
  
  build_all_generate_profile:
--	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-generate" LIBS="$(LIBS) -lgcov"
-+	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) -fprofile-generate" LIBS="$(LIBS) -lgcov"
+-	$(MAKE) all CFLAGS="$(CFLAGS) $(PGO_PROF_GEN_FLAG)" LDFLAGS="$(LDFLAGS) $(PGO_PROF_GEN_FLAG)" LIBS="$(LIBS)"
++	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) $(PGO_PROF_GEN_FLAG)" LDFLAGS="$(LDFLAGS) $(PGO_PROF_GEN_FLAG)" LIBS="$(LIBS)"
  
  run_profile_task:
  	: # FIXME: can't run for a cross build
--	./$(BUILDPYTHON) $(PROFILE_TASK)
-+	-./$(BUILDPYTHON) $(PROFILE_TASK)
+-	$(LLVM_PROF_FILE) ./$(BUILDPYTHON) $(PROFILE_TASK) || true
++	-$(LLVM_PROF_FILE) ./$(BUILDPYTHON) $(PROFILE_TASK) || true
+ 
+ build_all_merge_profile:
+ 	$(LLVM_PROF_MERGER)
  
  build_all_use_profile:
--	$(MAKE) all CFLAGS="$(CFLAGS) -fprofile-use"
-+	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) -fprofile-use -fprofile-correction"
+-	$(MAKE) all CFLAGS="$(CFLAGS) $(PGO_PROF_USE_FLAG)"
++	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) $(PGO_PROF_USE_FLAG)"
  
  coverage:
  	@echo "Building with support for coverage checking:"
