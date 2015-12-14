@@ -1,6 +1,6 @@
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -1101,6 +1101,8 @@
+@@ -1131,6 +1131,8 @@
  	# Substitution happens here, as the completely-expanded BINDIR
  	# is not available in configure
  	sed -e "s,@EXENAME@,$(BINDIR)/python$(VERSION)$(EXE)," < $(srcdir)/Misc/python-config.in >python-config
@@ -9,7 +9,7 @@
  
  # Install the include files
  INCLDIRSTOMAKE=$(INCLUDEDIR) $(CONFINCLUDEDIR) $(INCLUDEPY) $(CONFINCLUDEPY)
-@@ -1160,6 +1162,7 @@
+@@ -1190,6 +1192,7 @@
  	$(INSTALL_SCRIPT) $(srcdir)/install-sh $(DESTDIR)$(LIBPL)/install-sh
  	$(INSTALL_SCRIPT) python-config $(DESTDIR)$(BINDIR)/python$(VERSION)-config
  	rm python-config
@@ -163,7 +163,7 @@
  
  if test "$cross_compiling" = yes; then
  	RUNSHARED=
-@@ -4596,7 +4599,7 @@
+@@ -4692,7 +4695,7 @@
  AC_SUBST(ENSUREPIP)
  
  # generate output files

@@ -56,7 +56,7 @@
  def get_scheme_names():
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -117,8 +117,8 @@
+@@ -122,8 +122,8 @@
  # Detailed destination directories
  BINLIBDEST=	$(LIBDIR)/python$(VERSION)
  LIBDEST=	$(SCRIPTDIR)/python$(VERSION)
@@ -67,7 +67,7 @@
  LIBP=		$(LIBDIR)/python$(VERSION)
  
  # Symbols used for using shared libraries
-@@ -132,6 +132,8 @@
+@@ -137,6 +137,8 @@
  EXE=		@EXEEXT@
  BUILDEXE=	@BUILDEXEEXT@
  
@@ -76,7 +76,7 @@
  # Short name and location for Mac OS X Python framework
  UNIVERSALSDK=@UNIVERSALSDK@
  PYTHONFRAMEWORK=	@PYTHONFRAMEWORK@
-@@ -494,7 +496,7 @@
+@@ -519,7 +521,7 @@
  	$(AR) $(ARFLAGS) $@ $(sort $(MODOBJS))
  	$(RANLIB) $@
  
@@ -85,7 +85,7 @@
  	if test $(INSTSONAME) != $(LDLIBRARY); then \
  		$(BLDSHARED) $(PY_LDFLAGS) -Wl,-h$(INSTSONAME) -o $(INSTSONAME) $(LIBRARY_OBJS) $(MODLIBS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
  		$(LN) -f $(INSTSONAME) $@; \
-@@ -1112,8 +1114,8 @@
+@@ -1142,8 +1144,8 @@
  	$(INSTALL_DATA) pyconfig.h $(DESTDIR)$(CONFINCLUDEPY)/pyconfig.h
  
  # Install the library and miscellaneous stuff needed for extending/embedding
@@ -170,7 +170,7 @@
  # XXX Shouldn't the code above that fiddles with BASECFLAGS and OPT be
  # merged with this chunk of code?
  
-@@ -1922,7 +1928,7 @@
+@@ -1967,7 +1973,7 @@
  		esac
  		;;
  	CYGWIN*)   SO=.dll;;

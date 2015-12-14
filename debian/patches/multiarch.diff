@@ -24,7 +24,7 @@
  
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -97,6 +97,9 @@
+@@ -102,6 +102,9 @@
  # Multiarch directory (may be empty)
  MULTIARCH=	@MULTIARCH@
  
@@ -34,7 +34,7 @@
  # Install prefix for architecture-independent files
  prefix=		@prefix@
  
-@@ -571,6 +574,10 @@
+@@ -596,6 +599,10 @@
  	@mv config.c Modules
  	@echo "The Makefile was updated, you may need to re-run make."
  
@@ -45,7 +45,7 @@
  
  Modules/Setup: $(srcdir)/Modules/Setup.dist
  	@if test -f Modules/Setup; then \
-@@ -1115,10 +1122,10 @@
+@@ -1145,10 +1152,10 @@
  
  # Install the library and miscellaneous stuff needed for extending/embedding
  # This goes into $(exec_prefix)$(DEBUG_EXT)
@@ -58,7 +58,7 @@
  
  libainstall:	all python-config
  	@for i in $(LIBDIR) $(LIBP) $(LIBPL) $(LIBPC); \
-@@ -1394,6 +1401,11 @@
+@@ -1426,6 +1433,11 @@
  
  Python/thread.o: @THREADHEADERS@
  

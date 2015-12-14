@@ -1,10 +1,8 @@
 # DP: Fix profiled build; don't use Python/thread.gc*, gcc complains
 
-Index: python2.7-updates/Makefile.pre.in
-===================================================================
---- python2.7-updates.orig/Makefile.pre.in
-+++ python2.7-updates/Makefile.pre.in
-@@ -453,22 +453,22 @@ profile-opt:
+--- a/Makefile.pre.in
++++ b/Makefile.pre.in
+@@ -453,22 +453,22 @@
  	$(MAKE) profile-removal
  
  build_all_generate_profile:
