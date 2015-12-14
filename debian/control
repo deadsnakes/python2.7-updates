@@ -44,7 +44,8 @@ Priority: optional
 Depends: ${shlibs:Depends}, ${misc:Depends}, python-minimal (>= 2.6.6-3+squeeze1)
 Recommends: python2.7
 Suggests: binfmt-support
-Replaces: python2.7 (<< 2.7.1~rc1-2~)
+Breaks: python2.7 (<< 2.7.9)
+Replaces: python2.7 (<< 2.7.1~rc1-2~), python2.7 (<< 2.7.9)
 Conflicts: binfmt-support (<< 1.1.2)
 Description: Minimal subset of the Python language (version 2.7)
  This package contains the interpreter and some essential modules.  It can

@@ -44,7 +44,8 @@ Priority: @MINPRIO@
 Depends: ${shlibs:Depends}, ${misc:Depends}, python-minimal (>= 2.6.6-3+squeeze1)
 Recommends: @PVER@
 Suggests: binfmt-support
-Replaces: @PVER@ (<< 2.7.1~rc1-2~)
+Breaks: @PVER@ (<< 2.7.9)
+Replaces: @PVER@ (<< 2.7.1~rc1-2~), @PVER@ (<< 2.7.9)
 Conflicts: binfmt-support (<< 1.1.2)
 Description: Minimal subset of the Python language (version @VER@)
  This package contains the interpreter and some essential modules.  It can
