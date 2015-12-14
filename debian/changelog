@@ -1,3 +1,9 @@
+python2.7 (2.7.11-0+precise1) precise; urgency=medium
+
+  * Import new upstream release Python 2.7.11.
+
+ -- Felix Krull <f_krull@gmx.de>  Mon, 14 Dec 2015 21:49:55 +0100
+
 python2.7 (2.7.10-0+precise1) precise; urgency=medium
 
   * Imported new upstream release Python 2.7.10.
