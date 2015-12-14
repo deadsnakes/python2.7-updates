@@ -2,7 +2,7 @@
 
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1525,6 +1525,8 @@
+@@ -1570,6 +1570,8 @@
  
  # checks for header files
  AC_HEADER_STDC
@@ -11,7 +11,7 @@
  AC_CHECK_HEADERS(asm/types.h conio.h direct.h dlfcn.h errno.h \
  fcntl.h grp.h \
  ieeefp.h io.h langinfo.h libintl.h poll.h process.h pthread.h \
-@@ -1549,6 +1551,7 @@
+@@ -1594,6 +1596,7 @@
  #include <sys/socket.h>
  #endif
  ])
@@ -19,7 +19,7 @@
  
  # checks for typedefs
  was_it_defined=no
-@@ -4340,6 +4343,8 @@
+@@ -4385,6 +4388,8 @@
  #endif
  ])
  
@@ -28,7 +28,7 @@
  # On HP/UX 11.0, mvwdelch is a block with a return statement
  AC_MSG_CHECKING(whether mvwdelch is an expression)
  AC_CACHE_VAL(ac_cv_mvwdelch_is_expression,
-@@ -4387,6 +4392,7 @@
+@@ -4432,6 +4437,7 @@
     AC_MSG_RESULT(yes)],
    [AC_MSG_RESULT(no)]
  )

@@ -1,6 +1,6 @@
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -123,8 +123,8 @@
+@@ -128,8 +128,8 @@
  
  # Symbols used for using shared libraries
  SO=		@SO@
@@ -11,7 +11,7 @@
  LDCXXSHARED=	@LDCXXSHARED@
  DESTSHARED=	$(BINLIBDEST)/lib-dynload
  
-@@ -448,7 +448,7 @@
+@@ -473,7 +473,7 @@
  
  # Build the interpreter
  $(BUILDPYTHON):	Modules/python.o $(LIBRARY) $(LDLIBRARY)

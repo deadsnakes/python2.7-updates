@@ -2,7 +2,7 @@
 
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -450,7 +450,7 @@
+@@ -475,7 +475,7 @@
  $(BUILDPYTHON):	Modules/python.o $(LIBRARY) $(LDLIBRARY)
  		$(LINKCC) $(PY_LDFLAGS) $(LINKFORSHARED) -o $@ \
  			Modules/python.o \
