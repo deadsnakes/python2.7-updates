@@ -1,0 +1,19 @@
+Description: Ensure that UNIX sockets are fully closed.
+Origin: http://bugs.python.org/issue15179
+
+diff -r 3b5545ba6432 Lib/logging/handlers.py
+--- a/Lib/logging/handlers.py	Wed Jun 13 22:15:26 2012 -0400
++++ b/Lib/logging/handlers.py	Mon Jun 25 20:33:51 2012 +0900
+@@ -801,7 +801,11 @@
+         except socket.error:
+             self.socket.close()
+             self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+-            self.socket.connect(address)
++            try:
++                self.socket.connect(address)
++            except socket.error:
++                self.socket.close()
++                raise
+ 
+     def encodePriority(self, facility, priority):
+         """

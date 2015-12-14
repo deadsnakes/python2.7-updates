@@ -1,0 +1,13 @@
+--- a/Doc/conf.py
++++ b/Doc/conf.py
+@@ -38,8 +38,8 @@
+     'library/xml.etree.rst',
+ ]
+ 
+-# Require Sphinx 1.2 for build.
+-needs_sphinx = '1.2'
++# 12.04 doesn't have Sphinx 1.2, so we "compromise" on 1.1.
++needs_sphinx = '1.1'
+ 
+ 
+ # Options for HTML output

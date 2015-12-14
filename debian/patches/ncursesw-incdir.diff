@@ -1,0 +1,38 @@
+# DP: use the correct include directory when linking with ncursesw.
+
+--- a/configure.ac
++++ b/configure.ac
+@@ -1570,6 +1570,8 @@
+ 
+ # checks for header files
+ AC_HEADER_STDC
++ac_save_cppflags="$CPPFLAGS"
++CPPFLAGS="$CPPFLAGS -I/usr/include/ncursesw"
+ AC_CHECK_HEADERS(asm/types.h conio.h direct.h dlfcn.h errno.h \
+ fcntl.h grp.h \
+ ieeefp.h io.h langinfo.h libintl.h poll.h process.h pthread.h \
+@@ -1594,6 +1596,7 @@
+ #include <sys/socket.h>
+ #endif
+ ])
++CPPFLAGS=$ac_save_cppflags
+ 
+ # checks for typedefs
+ was_it_defined=no
+@@ -4385,6 +4388,8 @@
+ #endif
+ ])
+ 
++ac_save_cppflags="$CPPFLAGS"
++CPPFLAGS="$CPPFLAGS -I/usr/include/ncursesw"
+ # On HP/UX 11.0, mvwdelch is a block with a return statement
+ AC_MSG_CHECKING(whether mvwdelch is an expression)
+ AC_CACHE_VAL(ac_cv_mvwdelch_is_expression,
+@@ -4432,6 +4437,7 @@
+    AC_MSG_RESULT(yes)],
+   [AC_MSG_RESULT(no)]
+ )
++CPPFLAGS=$ac_save_cppflags
+ 
+ AC_MSG_CHECKING(for resizeterm)
+ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <curses.h>]], [[void *x=resizeterm]])],
