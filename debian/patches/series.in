@@ -58,7 +58,6 @@ disable-sem-check.diff
 ncursesw-incdir.diff
 ctypes-arm.diff
 lto-link-flags.diff
-do-not-italicize-punctuation.patch
 multiarch.diff
 lib2to3-no-pickled-grammar.diff
 add-python-config-sh.diff
