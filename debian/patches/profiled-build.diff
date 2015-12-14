@@ -1,0 +1,31 @@
+# DP: Fix profiled build; don't use Python/thread.gc*, gcc complains
+
+--- a/Makefile.pre.in
++++ b/Makefile.pre.in
+@@ -453,22 +453,22 @@
+ 	$(MAKE) profile-removal
+ 
+ build_all_generate_profile:
+-	$(MAKE) all CFLAGS="$(CFLAGS) $(PGO_PROF_GEN_FLAG)" LDFLAGS="$(LDFLAGS) $(PGO_PROF_GEN_FLAG)" LIBS="$(LIBS)"
++	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) $(PGO_PROF_GEN_FLAG)" LDFLAGS="$(LDFLAGS) $(PGO_PROF_GEN_FLAG)" LIBS="$(LIBS)"
+ 
+ run_profile_task:
+ 	: # FIXME: can't run for a cross build
+-	$(LLVM_PROF_FILE) ./$(BUILDPYTHON) $(PROFILE_TASK) || true
++	-$(LLVM_PROF_FILE) ./$(BUILDPYTHON) $(PROFILE_TASK) || true
+ 
+ build_all_merge_profile:
+ 	$(LLVM_PROF_MERGER)
+ 
+ build_all_use_profile:
+-	$(MAKE) all CFLAGS="$(CFLAGS) $(PGO_PROF_USE_FLAG)"
++	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) $(PGO_PROF_USE_FLAG)"
+ 
+ coverage:
+ 	@echo "Building with support for coverage checking:"
+ 	$(MAKE) clean
+-	$(MAKE) all CFLAGS="$(CFLAGS) -O0 -pg -fprofile-arcs -ftest-coverage" LIBS="$(LIBS) -lgcov"
++	$(MAKE) all PY_CFLAGS="$(PY_CFLAGS) -O0 -pg -fprofile-arcs -ftest-coverage" LIBS="$(LIBS) -lgcov"
+ 
+ 
+ # Build the interpreter
