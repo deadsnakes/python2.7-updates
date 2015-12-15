@@ -1,3 +1,9 @@
+python2.7 (2.7.11-0+trusty1) trusty; urgency=medium
+
+  * Import new upstream release Python 2.7.11.
+
+ -- Felix Krull <f_krull@gmx.de>  Mon, 14 Dec 2015 23:50:42 +0100
+
 python2.7 (2.7.10-0+trusty1) trusty; urgency=medium
 
   * Imported new upstream release Python 2.7.10.
