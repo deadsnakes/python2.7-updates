@@ -18,8 +18,8 @@ Build-Depends: debhelper (>= 5), quilt, autoconf, lsb-release, sharutils,
 Build-Depends-Indep: python-sphinx
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, @PVER@-xml, python-xml, autoconf2.13, python-cxx-dev
 Standards-Version: 3.9.3
-Vcs-Browser: https://bitbucket.org/fk/deadsnakes-@PVER@-updates
-Vcs-Git: https://bitbucket.org/fk/deadsnakes-@PVER@-updates.git
+Vcs-Browser: https://bitbucket.org/fkpackaging/deadsnakes-@PVER@-updates
+Vcs-Git: https://bitbucket.org/fkpackaging/deadsnakes-@PVER@-updates.git
 #Vcs-Browser: https://code.launchpad.net/~doko/python/pkg@VER@-debian
 #Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg@VER@-debian
 
