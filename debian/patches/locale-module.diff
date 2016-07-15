@@ -4,7 +4,7 @@
 
 --- a/Lib/locale.py
 +++ b/Lib/locale.py
-@@ -1699,8 +1699,8 @@
+@@ -1701,8 +1701,8 @@
      'uk_ua.iso88595':                       'uk_UA.ISO8859-5',
      'uk_ua.koi8u':                          'uk_UA.KOI8-U',
      'uk_ua.microsoftcp1251':                'uk_UA.CP1251',

@@ -2,7 +2,7 @@
 
 --- a/setup.py
 +++ b/setup.py
-@@ -1070,7 +1070,13 @@
+@@ -1090,7 +1090,13 @@
              if db_setup_debug:
                  print "bsddb using BerkeleyDB lib:", db_ver, dblib
                  print "bsddb lib dir:", dblib_dir, " inc dir:", db_incdir

@@ -109,7 +109,7 @@
  
  
  # Machine-dependent subdirectories
-@@ -465,7 +471,7 @@
+@@ -508,7 +514,7 @@
  
  # Build the interpreter
  $(BUILDPYTHON):	Modules/python.o $(LIBRARY) $(LDLIBRARY)
@@ -118,7 +118,7 @@
  			Modules/python.o \
  			$(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
  
-@@ -497,7 +503,7 @@
+@@ -544,7 +550,7 @@
  	    *\ -s*|s*) quiet="-q";; \
  	    *) quiet="";; \
  	esac; \
@@ -127,7 +127,7 @@
  		_TCLTK_INCLUDES='$(TCLTK_INCLUDES)' _TCLTK_LIBS='$(TCLTK_LIBS)' \
  		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py $$quiet build
  
-@@ -515,18 +521,18 @@
+@@ -562,18 +568,18 @@
  
  libpython$(VERSION).so: $(LIBRARY_OBJS)
  	if test $(INSTSONAME) != $(LDLIBRARY); then \
@@ -150,7 +150,7 @@
  
  # Copy up the gdb python hooks into a position where they can be automatically
  # loaded by gdb during Lib/test/test_gdb.py
-@@ -565,7 +571,7 @@
+@@ -612,7 +618,7 @@
  # for a shared core library; otherwise, this rule is a noop.
  $(DLLLIBRARY) libpython$(VERSION).dll.a: $(LIBRARY_OBJS)
  	if test -n "$(DLLLIBRARY)"; then \
@@ -159,7 +159,7 @@
  			$(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST); \
  	else true; \
  	fi
-@@ -609,7 +615,7 @@
+@@ -656,7 +662,7 @@
  		$(SIGNAL_OBJS) \
  		$(MODOBJS) \
  		$(srcdir)/Modules/getbuildinfo.c
@@ -168,7 +168,7 @@
  	      -DSVNVERSION="\"`LC_ALL=C $(SVNVERSION)`\"" \
  	      -DHGVERSION="\"`LC_ALL=C $(HGVERSION)`\"" \
  	      -DHGTAG="\"`LC_ALL=C $(HGTAG)`\"" \
-@@ -617,7 +623,7 @@
+@@ -664,7 +670,7 @@
  	      -o $@ $(srcdir)/Modules/getbuildinfo.c
  
  Modules/getpath.o: $(srcdir)/Modules/getpath.c Makefile
@@ -177,7 +177,7 @@
  		-DPREFIX='"$(prefix)"' \
  		-DEXEC_PREFIX='"$(exec_prefix)"' \
  		-DVERSION='"$(VERSION)"' \
-@@ -625,7 +631,7 @@
+@@ -672,7 +678,7 @@
  		-o $@ $(srcdir)/Modules/getpath.c
  
  Modules/python.o: $(srcdir)/Modules/python.c
@@ -186,8 +186,8 @@
  
  Modules/posixmodule.o: $(srcdir)/Modules/posixmodule.c $(srcdir)/Modules/posixmodule.h
  
-@@ -642,7 +648,7 @@
- 		touch $(GRAMMAR_C)
+@@ -698,7 +704,7 @@
+ 	fi
  
  $(PGEN):	$(PGENOBJS)
 -		$(CC) $(OPT) $(LDFLAGS) $(PGENOBJS) $(LIBS) -o $(PGEN)
@@ -195,7 +195,7 @@
  
  Parser/grammar.o:	$(srcdir)/Parser/grammar.c \
  				$(srcdir)/Include/token.h \
-@@ -664,10 +670,10 @@
+@@ -720,10 +726,10 @@
  Python/compile.o Python/symtable.o Python/ast.o: $(GRAMMAR_H) $(AST_H)
  
  Python/getplatform.o: $(srcdir)/Python/getplatform.c
@@ -208,7 +208,7 @@
  
  Objects/unicodectype.o:	$(srcdir)/Objects/unicodectype.c \
  				$(srcdir)/Objects/unicodetype_db.h
-@@ -1297,7 +1303,7 @@
+@@ -1357,7 +1363,7 @@
  
  # Some make's put the object file in the current directory
  .c.o:
@@ -230,7 +230,7 @@
  			echo "$rule" >>$rulesf
 --- a/configure.ac
 +++ b/configure.ac
-@@ -613,14 +613,13 @@
+@@ -630,14 +630,13 @@
      fi
  fi
  

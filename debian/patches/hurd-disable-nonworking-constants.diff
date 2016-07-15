@@ -20,7 +20,7 @@
  #ifdef O_NOINHERIT
 --- a/Modules/socketmodule.c
 +++ b/Modules/socketmodule.c
-@@ -4908,9 +4908,11 @@
+@@ -4930,9 +4930,11 @@
  #ifdef  SO_OOBINLINE
      PyModule_AddIntConstant(m, "SO_OOBINLINE", SO_OOBINLINE);
  #endif
