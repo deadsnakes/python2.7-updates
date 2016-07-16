@@ -1,10 +1,10 @@
-python2.7 (2.7.12-0~precise1) UNRELEASED; urgency=medium
+python2.7 (2.7.12-1~precise1) precise; urgency=medium
 
   * Import new upstream release Python 2.7.12.
   * debian/control: update VCS info.
   * debian/libpython.symbols.in: add new symbols.
 
- -- Felix Krull <f_krull@gmx.de>  Fri, 15 Jul 2016 18:32:00 +0200
+ -- Felix Krull <f_krull@gmx.de>  Sat, 16 Jul 2016 16:19:37 +0200
 
 python2.7 (2.7.11-0+precise1) precise; urgency=medium
 
