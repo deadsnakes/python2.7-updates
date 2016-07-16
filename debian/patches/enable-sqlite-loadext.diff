@@ -2,7 +2,7 @@
 
 --- a/setup.py
 +++ b/setup.py
-@@ -1180,7 +1180,7 @@
+@@ -1200,7 +1200,7 @@
                  sqlite_defines.append(('MODULE_NAME', '\\"sqlite3\\"'))
  
              # Comment this out if you want the sqlite3 module to be able to load extensions.

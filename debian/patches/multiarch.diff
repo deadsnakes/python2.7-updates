@@ -34,7 +34,7 @@
  # Install prefix for architecture-independent files
  prefix=		@prefix@
  
-@@ -596,6 +599,10 @@
+@@ -643,6 +646,10 @@
  	@mv config.c Modules
  	@echo "The Makefile was updated, you may need to re-run make."
  
@@ -45,7 +45,7 @@
  
  Modules/Setup: $(srcdir)/Modules/Setup.dist
  	@if test -f Modules/Setup; then \
-@@ -1145,10 +1152,10 @@
+@@ -1205,10 +1212,10 @@
  
  # Install the library and miscellaneous stuff needed for extending/embedding
  # This goes into $(exec_prefix)$(DEBUG_EXT)
@@ -58,7 +58,7 @@
  
  libainstall:	all python-config
  	@for i in $(LIBDIR) $(LIBP) $(LIBPL) $(LIBPC); \
-@@ -1426,6 +1433,11 @@
+@@ -1487,6 +1494,11 @@
  
  Python/thread.o: @THREADHEADERS@
  
@@ -87,7 +87,7 @@
      {"module.so", "rb", C_EXTENSION},
 --- a/configure.ac
 +++ b/configure.ac
-@@ -493,8 +493,11 @@
+@@ -494,8 +494,11 @@
  fi
  AC_MSG_RESULT($MACHDEP)
  
@@ -100,7 +100,7 @@
  
  # And add extra plat-mac for darwin
  AC_SUBST(EXTRAPLATDIR)
-@@ -675,9 +678,6 @@
+@@ -692,9 +695,6 @@
    ])
  fi
  

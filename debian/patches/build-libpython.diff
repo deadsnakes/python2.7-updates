@@ -2,7 +2,7 @@
 
 --- a/Makefile.pre.in
 +++ b/Makefile.pre.in
-@@ -421,7 +421,7 @@
+@@ -429,7 +429,7 @@
  		$(PYTHON_OBJS) \
  		$(MODULE_OBJS) \
  		$(SIGNAL_OBJS) \
@@ -11,7 +11,7 @@
  
  #########################################################################
  # Rules
-@@ -516,7 +516,7 @@
+@@ -563,7 +563,7 @@
  	$(AR) $(ARFLAGS) $@ $(OBJECT_OBJS)
  	$(AR) $(ARFLAGS) $@ $(PYTHON_OBJS)
  	$(AR) $(ARFLAGS) $@ $(MODULE_OBJS) $(SIGNAL_OBJS)

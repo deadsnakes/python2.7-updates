@@ -2,7 +2,7 @@
 
 --- a/configure.ac
 +++ b/configure.ac
-@@ -3893,6 +3893,11 @@
+@@ -3957,6 +3957,11 @@
  [ac_cv_posix_semaphores_enabled=no],
  [ac_cv_posix_semaphores_enabled=yes])
  )
@@ -14,7 +14,7 @@
  AC_MSG_RESULT($ac_cv_posix_semaphores_enabled)
  if test $ac_cv_posix_semaphores_enabled = no
  then
-@@ -3929,6 +3934,11 @@
+@@ -3993,6 +3998,11 @@
  [ac_cv_broken_sem_getvalue=yes],
  [ac_cv_broken_sem_getvalue=yes])
  )

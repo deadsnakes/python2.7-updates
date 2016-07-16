@@ -2,7 +2,7 @@
 
 --- a/configure.ac
 +++ b/configure.ac
-@@ -2081,8 +2081,8 @@
+@@ -2145,8 +2145,8 @@
  		fi
  		;;
  	Linux*|GNU*|QNX*)
@@ -13,7 +13,7 @@
  	BSD/OS*/4*)
  		LDSHARED="gcc -shared"
  		LDCXXSHARED="g++ -shared";;
-@@ -2184,7 +2184,7 @@
+@@ -2248,7 +2248,7 @@
  	    LINKFORSHARED="-Wl,-E -Wl,+s";;
  #	    LINKFORSHARED="-Wl,-E -Wl,+s -Wl,+b\$(BINLIBDEST)/lib-dynload";;
  	BSD/OS/4*) LINKFORSHARED="-Xlinker -export-dynamic";;
