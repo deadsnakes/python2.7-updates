@@ -920,6 +920,7 @@
  _PyByteArray_empty_string@Base @VER@
  _PyBytes_FormatAdvanced@Base @VER@
  _PyCode_CheckLineNumber@Base @VER@
+ _PyCode_ConstantKey@Base 2.7.12
  _PyCodecInfo_GetIncrementalDecoder@Base 2.7.11
  _PyCodecInfo_GetIncrementalEncoder@Base 2.7.11
  _PyCodec_DecodeText@Base 2.7.11
@@ -928,6 +929,7 @@
  _PyCodec_LookupTextEncoding@Base 2.7.11
  _PyComplex_FormatAdvanced@Base @VER@
  _PyDict_Contains@Base @VER@
+ _PyDict_GetItemWithError@Base 2.7.12
  _PyDict_MaybeUntrack@Base @VER@
  _PyDict_NewPresized@Base @VER@
  _PyDict_Next@Base @VER@
