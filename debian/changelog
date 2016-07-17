@@ -1,10 +1,10 @@
-python2.7 (2.7.12-1~trusty1) UNRELEASED; urgency=medium
+python2.7 (2.7.12-1~trusty1) trusty; urgency=medium
 
   * Import new upstream release Python 2.7.12.
   * debian/control: Update VCS info.
   * debian/libpython.symbols.in: add new symbols.
 
- -- Felix Krull <f_krull@gmx.de>  Sat, 16 Jul 2016 16:56:18 +0200
+ -- Felix Krull <f_krull@gmx.de>  Sun, 17 Jul 2016 03:03:41 +0200
 
 python2.7 (2.7.11-0+trusty1) trusty; urgency=medium
 
